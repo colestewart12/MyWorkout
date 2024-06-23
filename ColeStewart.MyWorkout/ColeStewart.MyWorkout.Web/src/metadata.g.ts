@@ -29,6 +29,44 @@ export const WidgetCategory = domain.enums.WidgetCategory = {
   },
   ]),
 }
+export const User = domain.types.User = {
+  name: "User",
+  displayName: "User",
+  get displayProp() { return this.props.name }, 
+  type: "model",
+  controllerRoute: "User",
+  get keyProp() { return this.props.userId }, 
+  behaviorFlags: 7 as BehaviorFlags,
+  props: {
+    userId: {
+      name: "userId",
+      displayName: "User Id",
+      type: "number",
+      role: "primaryKey",
+      hidden: 3 as HiddenAreas,
+    },
+    name: {
+      name: "name",
+      displayName: "Name",
+      type: "string",
+      role: "value",
+      rules: {
+        required: val => (val != null && val !== '') || "Name is required.",
+      }
+    },
+    birthDate: {
+      name: "birthDate",
+      displayName: "Birth Date",
+      type: "date",
+      dateKind: "datetime",
+      role: "value",
+    },
+  },
+  methods: {
+  },
+  dataSources: {
+  },
+}
 export const Widget = domain.types.Widget = {
   name: "Widget",
   displayName: "Widget",
@@ -83,6 +121,7 @@ interface AppDomain extends Domain {
     WidgetCategory: typeof WidgetCategory
   }
   types: {
+    User: typeof User
     Widget: typeof Widget
   }
   services: {

@@ -3,6 +3,27 @@ import * as $models from './models.g'
 import * as $apiClients from './api-clients.g'
 import { ViewModel, ListViewModel, ServiceViewModel, DeepPartial, defineProps } from 'coalesce-vue/lib/viewmodel'
 
+export interface UserViewModel extends $models.User {
+  userId: number | null;
+  name: string | null;
+  birthDate: Date | null;
+}
+export class UserViewModel extends ViewModel<$models.User, $apiClients.UserApiClient, number> implements $models.User  {
+  
+  constructor(initialData?: DeepPartial<$models.User> | null) {
+    super($metadata.User, new $apiClients.UserApiClient(), initialData)
+  }
+}
+defineProps(UserViewModel, $metadata.User)
+
+export class UserListViewModel extends ListViewModel<$models.User, $apiClients.UserApiClient, UserViewModel> {
+  
+  constructor() {
+    super($metadata.User, new $apiClients.UserApiClient())
+  }
+}
+
+
 export interface WidgetViewModel extends $models.Widget {
   widgetId: number | null;
   name: string | null;
@@ -26,9 +47,11 @@ export class WidgetListViewModel extends ListViewModel<$models.Widget, $apiClien
 
 
 const viewModelTypeLookup = ViewModel.typeLookup = {
+  User: UserViewModel,
   Widget: WidgetViewModel,
 }
 const listViewModelTypeLookup = ListViewModel.typeLookup = {
+  User: UserListViewModel,
   Widget: WidgetListViewModel,
 }
 const serviceViewModelTypeLookup = ServiceViewModel.typeLookup = {
