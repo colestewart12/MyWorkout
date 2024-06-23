@@ -1,0 +1,16 @@
+{
+  "webProject": {
+    "projectFile": "./ColeStewart.MyWorkout.Web/ColeStewart.MyWorkout.Web.csproj"
+  },
+  "dataProject": {
+    "projectFile": "./ColeStewart.MyWorkout.Data/ColeStewart.MyWorkout.Data.csproj"
+  },
+
+  "rootGenerator": "Vue",
+
+  "generatorConfig": {
+    "Scripts": {
+      "targetDirectory": "../src"
+    }
+  }
+}
