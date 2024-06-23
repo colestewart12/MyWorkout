@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using ColeStewart.MyWorkout.Data.Models;
+using Microsoft.Identity.Client;
 
 namespace ColeStewart.MyWorkout.Data;
 
@@ -7,6 +8,7 @@ namespace ColeStewart.MyWorkout.Data;
 public class AppDbContext : DbContext
 {
     public DbSet<Widget> Widgets => Set<Widget>();
+    public DbSet<User> Users => Set<User>();
 
     public AppDbContext() { }
 
