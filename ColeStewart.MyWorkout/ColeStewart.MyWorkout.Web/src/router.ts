@@ -20,6 +20,12 @@ export default createRouter({
       name: "admin",
       component: () => import("./views/Admin.vue"),
     },
+    {
+      path: '/person/:id',
+      name: 'person-details',
+      component: () => import('@/views/User.vue'),
+      props: route => ({ id: +route.params.id }),
+    },
 
     // Coalesce admin routes
     {
