@@ -22,6 +22,11 @@
           title="Workout Log"
         />
         <v-list-item
+          to="/exercise"
+          prepend-icon="fas fa-running"
+          title="Exercise Log"
+        />
+        <v-list-item
           to="/admin"
           prepend-icon="fas fa-cogs"
           title="Admin Pages"
