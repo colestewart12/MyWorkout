@@ -21,14 +21,7 @@ jobs:
           global-json-file: global.json
 
       - name: Run .NET Tests
-        run: dotnet test --filter "FullyQualifiedName!~StormingTheCastle.Tests.Integration&FullyQualifiedName!~StormingTheCastle.Tests.Snapshot" --no-build --verbosity normal /p:CollectCoverage=true --configuration Release --collect:"XPlat Code Coverage" --logger trx --results-directory coveragereport-unit --settings ${{github.workspace}}/.runsettings
-
-      - name: Upload test results
-        uses: actions/upload-artifact@v4
-        with:
-          name: test-results-unit
-          path: coveragereport-unit/**/coverage.cobertura.xml
-          if-no-files-found: error
+        run: dotnet test --no-build --verbosity normal /p:CollectCoverage=true --configuration Release --collect:"XPlat Code Coverage" --logger trx --results-directory coveragereport-unit --settings ${{github.workspace}}/.runsettings
  
   validate-csharp:
       name: Validate C# Code
@@ -42,7 +35,7 @@ jobs:
             global-json-file: global.json
   
         - name: Ensure Coalesce has run
-          working-directory: ./StormingTheCastle.Web
+          working-directory: ./ColeStewart.MyWorkout.Web
           run: |
             echo 'Running Coalesce'
             dotnet -d coalesce
@@ -64,10 +57,10 @@ jobs:
         uses: ./.github/actions/setup-npm
         with:
           node-version: 20
-          working-directory: "./StormingTheCastle.Web"
+          working-directory: "./ColeStewart.MyWorkout.Web"
       - name: Ensure linter has run
-        working-directory: ./StormingTheCastle.Web
+        working-directory: ./ColeStewart.MyWorkout.Web
         run: npm run lint
       - name: Run TS Vite Tests
-        working-directory: ./StormingTheCastle.Web
+        working-directory: ./ColeStewart.MyWorkout.Web
         run: npm run test
