@@ -5,6 +5,7 @@
         <h2 class="wrap-break">{{ exercise.name }}</h2>
         <v-spacer />
         <v-btn
+          @click="editExercise = true"
           color="primary"
           aria-label="Edit exercise"
           icon="fas fa-pencil"
@@ -12,6 +13,10 @@
           size="small"
         />
       </div>
+      <EditExerciseDialog
+        v-model="editExercise"
+        :exercise="exercise"
+      ></EditExerciseDialog>
       <div>
         {{ exercise.description }}
       </div>
@@ -24,4 +29,5 @@ import { ExerciseViewModel } from "@/viewmodels.g";
 const props = defineProps<{
   exercise: ExerciseViewModel;
 }>();
+const editExercise = ref<boolean>(false);
 </script>
