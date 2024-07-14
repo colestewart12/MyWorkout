@@ -13,6 +13,7 @@ import "@fortawesome/fontawesome-free/css/all.css";
 import "coalesce-vue-vuetify3/styles.css";
 import "@/site.scss";
 import "vuetify/styles";
+import { DARK_THEME } from "@/lib/symbols";
 
 import $metadata from "@/metadata.g";
 // viewmodels.g has side effects - it populates the global lookup on ViewModel and ListViewModel.
@@ -38,6 +39,12 @@ const vuetify = createVuetify({
     VSwitch: { color: "primary" }, // https://github.com/vuetifyjs/vuetify/issues/16486
   },
   theme: {
+    defaultTheme: localStorage.getItem(DARK_THEME) === "true" ? "dark" : "dark",
+    variations: {
+      colors: ["primary", "secondary"],
+      lighten: 5,
+      darken: 5,
+    },
     themes: {
       light: {
         colors: {
