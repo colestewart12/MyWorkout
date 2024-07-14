@@ -1,6 +1,6 @@
 <template>
     <v-container>
-    <v-card v-for="workout in workouts.$items" :id="workout.workoutId" :title="workout.title!"></v-card>
+    <v-card v-for="workout in workouts.$items" :key="workout.workoutId!" :title="workout.title!"></v-card>
   </v-container>
 </template>
 <script setup lang="ts">
