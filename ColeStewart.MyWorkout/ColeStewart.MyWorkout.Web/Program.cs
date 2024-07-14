@@ -89,7 +89,7 @@ if (app.Environment.IsDevelopment())
 app.UseAuthentication();
 app.UseAuthorization();
 
-var containsFileHashRegex = new Regex(@"[.-][0-9a-zA-Z-_]{8}\.[^\.]*$", RegexOptions.Compiled);
+var containsFileHashRegex = MyRegex();
 app.UseStaticFiles(new StaticFileOptions
 {
     OnPrepareResponse = ctx =>
@@ -133,4 +133,10 @@ using (var scope = app.Services.CreateScope())
 }
 
 app.Run();
+
+partial class Program
+{
+    [GeneratedRegex(@"[.-][0-9a-zA-Z-_]{8}\.[^\.]*$", RegexOptions.Compiled)]
+    private static partial Regex MyRegex();
+}
 #endregion

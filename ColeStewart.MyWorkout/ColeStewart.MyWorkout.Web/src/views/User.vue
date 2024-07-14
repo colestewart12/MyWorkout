@@ -1,22 +1,13 @@
 <template>
-    <dl>
-      <dt>Name</dt>
-      <dd>
-        <c-display :model="user" for="name" />
-      </dd>
-  
-      <dt>Date of Birth</dt>
-      <dd>
-        <c-display :model="user" for="birthDate" format="M/d/yyyy" />
-      </dd>
-    </dl>
-  </template>
-  
-  <script setup lang="ts"> 
-  import { UserViewModel } from "@/viewmodels.g";
-  
-  const props = defineProps<{ id: number }>();
-  const user = new UserViewModel();
-  
-  user.$load(props.id);
-  </script>
+  <v-container>
+    <v-card v-for="u in user.$items" :title="u.name!"></v-card>
+  </v-container>
+</template>
+
+<script setup lang="ts">
+import { UserListViewModel } from "@/viewmodels.g";
+const user = new UserListViewModel();
+
+user.$load();
+console.log(user.$items);
+</script>

@@ -64,8 +64,17 @@ namespace ColeStewart.MyWorkout.Web.Models
         /// </summary>
         public override ColeStewart.MyWorkout.Data.Models.User MapToNew(IMappingContext context)
         {
-            var entity = new ColeStewart.MyWorkout.Data.Models.User();
-            MapTo(entity, context);
+            var includes = context.Includes;
+
+            var entity = new ColeStewart.MyWorkout.Data.Models.User()
+            {
+                Name = Name,
+            };
+
+            if (OnUpdate(entity, context)) return entity;
+            if (ShouldMapTo(nameof(UserId))) entity.UserId = (UserId ?? entity.UserId);
+            if (ShouldMapTo(nameof(BirthDate))) entity.BirthDate = BirthDate;
+
             return entity;
         }
     }
