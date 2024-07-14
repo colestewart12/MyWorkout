@@ -46,13 +46,16 @@ jobs:
       - name: Ensure Coalesce has run
         working-directory: ColeStewart.MyWorkout/ColeStewart.MyWorkout.Web
         run: |
-          echo 'Running Coalesce'
-          dotnet coalesce
-          if ($LASTEXITCODE -ne 0) { throw "`dotnet coalesce` exited with code $LASTEXITCODE" }
-          echo 'Adding Changed Files'
-          git add .
-          echo 'Checking Diff'
-          git diff HEAD --cached --exit-code
+            echo 'Running Coalesce'
+            dotnet coalesce
+            if [ $? -ne 0 ]; then
+            echo "`dotnet coalesce` exited with code $?"
+            exit 1
+            fi
+            echo 'Adding Changed Files'
+            git add .
+            echo 'Checking Diff'
+            git diff HEAD --cached --exit-code
 
       - name: Run dotnet format checks
         run: dotnet format --verify-no-changes --verbosity diagnostic ColeStewart.MyWorkout/ColeStewart.MyWorkout.Web
