@@ -21,13 +21,13 @@ jobs:
           dotnet-version: '7.0.x'
 
       - name: Restore dependencies
-        run: dotnet restore /ColeStewart.MyWorkout.Web
+        run: dotnet restore ColeStewart.MyWorkout.Web
 
       - name: Build
-        run: dotnet build --configuration Release --no-restore ./ColeStewart.MyWorkout.Web
+        run: dotnet build --configuration Release --no-restore ColeStewart.MyWorkout.Web
 
       - name: Run .NET Tests
-        run: dotnet test --no-build --verbosity normal /p:CollectCoverage=true --configuration Release --collect:"XPlat Code Coverage" --logger trx --results-directory coveragereport-unit --settings ${{github.workspace}}/.runsettings /ColeStewart.MyWorkout.Web
+        run: dotnet test --no-build --verbosity normal /p:CollectCoverage=true --configuration Release --collect:"XPlat Code Coverage" --logger trx --results-directory coveragereport-unit --settings ${{github.workspace}}/.runsettings ColeStewart.MyWorkout.Web
 
   validate-csharp:
     name: Validate C# Code
@@ -41,10 +41,10 @@ jobs:
           dotnet-version: '7.0.x'
 
       - name: Restore dependencies
-        run: dotnet restore /ColeStewart.MyWorkout.Web
+        run: dotnet restore ColeStewart.MyWorkout.Web
 
       - name: Ensure Coalesce has run
-        working-directory: /ColeStewart.MyWorkout.Web
+        working-directory: ColeStewart.MyWorkout.Web
         run: |
           echo 'Running Coalesce'
           dotnet coalesce
@@ -55,7 +55,7 @@ jobs:
           git diff HEAD --cached --exit-code
 
       - name: Run dotnet format checks
-        run: dotnet format --verify-no-changes --verbosity diagnostic /ColeStewart.MyWorkout.Web
+        run: dotnet format --verify-no-changes --verbosity diagnostic ColeStewart.MyWorkout.Web
 
   validate-and-test-typescript:
     name: Validate and Test TypeScript Code
@@ -69,13 +69,13 @@ jobs:
           node-version: '20'
 
       - name: Install npm dependencies
-        working-directory: /ColeStewart.MyWorkout.Web
+        working-directory: ColeStewart.MyWorkout.Web
         run: npm install
 
       - name: Ensure linter has run
-        working-directory: /ColeStewart.MyWorkout.Web
+        working-directory: ColeStewart.MyWorkout.Web
         run: npm run lint
 
       - name: Run TS Vite Tests
-        working-directory: /ColeStewart.MyWorkout.Web
+        working-directory: ColeStewart.MyWorkout.Web
         run: npm run test
