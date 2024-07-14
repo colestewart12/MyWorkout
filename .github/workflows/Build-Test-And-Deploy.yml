@@ -1,0 +1,73 @@
+name: Build, Test, and Deploy MyWorkout
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  test-csharp-unit:
+    name: Run C# Unit Tests
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup and Build C# Code
+        uses: ./.github/actions/setup-dotnet
+        with:
+          global-json-file: global.json
+
+      - name: Run .NET Tests
+        run: dotnet test --filter "FullyQualifiedName!~StormingTheCastle.Tests.Integration&FullyQualifiedName!~StormingTheCastle.Tests.Snapshot" --no-build --verbosity normal /p:CollectCoverage=true --configuration Release --collect:"XPlat Code Coverage" --logger trx --results-directory coveragereport-unit --settings ${{github.workspace}}/.runsettings
+
+      - name: Upload test results
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-results-unit
+          path: coveragereport-unit/**/coverage.cobertura.xml
+          if-no-files-found: error
+ 
+  validate-csharp:
+      name: Validate C# Code
+      runs-on: ubuntu-latest
+      steps:
+        - uses: actions/checkout@v4
+  
+        - name: Setup and Build C# Code
+          uses: ./.github/actions/setup-dotnet
+          with:
+            global-json-file: global.json
+  
+        - name: Ensure Coalesce has run
+          working-directory: ./StormingTheCastle.Web
+          run: |
+            echo 'Running Coalesce'
+            dotnet -d coalesce
+            if ($LASTEXITCODE -ne 0) { throw "`dotnet coalesce` exited with code $LASTEXITCODE" }
+            echo 'Adding Changed Files'
+            git add .
+            echo 'Checking Diff'
+            git diff HEAD --cached --exit-code
+  
+        - name: Run dotnet format checks
+          run: dotnet format --verify-no-changes --verbosity diagnostic
+
+  validate-and-test-typescript:
+    name: Validate and Test TypeScript Code
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Setup and Build TypeScript
+        uses: ./.github/actions/setup-npm
+        with:
+          node-version: 20
+          working-directory: "./StormingTheCastle.Web"
+      - name: Ensure linter has run
+        working-directory: ./StormingTheCastle.Web
+        run: npm run lint
+      - name: Run TS Vite Tests
+        working-directory: ./StormingTheCastle.Web
+        run: npm run test
