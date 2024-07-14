@@ -27,10 +27,16 @@ export default createRouter({
     },
     {
       path: "/workout",
-      name: "workout-details",
-      component: () => import("@/views/Workout.vue"),
+      name: "workout-page",
+      component: () => import("@/views/Workouts.vue"),
       props: (route) => ({ id: +route.params.id }),
     },
+    {
+      path: "/exercise",
+      name: "exercise-page",
+      component: () => import("@/views/Exercises.vue"),
+    }
+    ,
 
     // Coalesce admin routes
     {

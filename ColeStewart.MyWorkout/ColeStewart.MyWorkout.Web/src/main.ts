@@ -41,7 +41,32 @@ const vuetify = createVuetify({
     themes: {
       light: {
         colors: {
-          primary: "#127815",
+          primary: "#ff0000", // Red color for primary in light theme
+          secondary: "#ffcccc", // Light red for secondary
+          accent: "#ff6666", // Slightly darker red for accent
+          error: "#ff4444", // Darker red for error messages
+          background: "#ffffff", // White background for light theme
+          surface: "#ffffff", // White surface for light theme
+          onPrimary: "#ffffff", // White text on primary red
+          onSecondary: "#000000", // Black text on secondary light red
+          onError: "#ffffff", // White text on error red
+          onBackground: "#000000", // Black text on white background
+          onSurface: "#000000", // Black text on white surface
+        },
+      },
+      dark: {
+        colors: {
+          primary: "#ff0000", // Red color for primary in dark theme
+          secondary: "#660000", // Dark red for secondary
+          accent: "#ff6666", // Slightly lighter red for accent
+          error: "#ff4444", // Darker red for error messages
+          background: "#000000", // Black background for dark theme
+          surface: "#121212", // Dark gray surface for dark theme
+          onPrimary: "#000000", // Black text on primary red
+          onSecondary: "#ffffff", // White text on secondary dark red
+          onError: "#000000", // Black text on error red
+          onBackground: "#ffffff", // White text on black background
+          onSurface: "#ffffff", // White text on dark gray surface
         },
       },
     },
