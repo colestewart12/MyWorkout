@@ -1,6 +1,6 @@
 <template>
   <v-container>
-    <v-card v-for="u in user.$items" :title="u.name!"></v-card>
+    <v-card v-for="u in user.$items" :key="u.userId!" :title="u.name!"></v-card>
   </v-container>
 </template>
 
