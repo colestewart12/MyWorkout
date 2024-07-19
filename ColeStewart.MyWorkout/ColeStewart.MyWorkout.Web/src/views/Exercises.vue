@@ -23,7 +23,6 @@
 </template>
 
 <script setup lang="ts">
-import ExerciseCard from "@/components/Exercise/ExerciseCard.vue";
 import { ExerciseListViewModel, ExerciseViewModel } from "@/viewmodels.g";
 
 const exercises = new ExerciseListViewModel();

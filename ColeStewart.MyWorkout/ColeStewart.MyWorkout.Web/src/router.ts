@@ -32,6 +32,12 @@ export default createRouter({
       props: (route) => ({ id: +route.params.id }),
     },
     {
+      path: "/workout/:workoutId",
+      name: "workout-details",
+      component: () => import("@/views/Workout.vue"),
+      props: (route) => ({ workoutId: +route.params.workoutId }),
+    },
+    {
       path: "/exercise",
       name: "exercise-page",
       component: () => import("@/views/Exercises.vue"),
