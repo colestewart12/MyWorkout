@@ -65,10 +65,10 @@ export class Exercise {
 export interface SetExercise extends Model<typeof metadata.SetExercise> {
   setExerciseId: number | null
   exerciseId: number | null
-  exercise: Exercise | null
-  workoutSetId: number | null
+  bracketId: number | null
   reps: number | null
   time: number | null
+  weight: number | null
 }
 export class SetExercise {
   

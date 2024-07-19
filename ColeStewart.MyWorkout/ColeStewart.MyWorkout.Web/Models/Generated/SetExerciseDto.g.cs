@@ -14,10 +14,10 @@ namespace ColeStewart.MyWorkout.Web.Models
 
         private int? _SetExerciseId;
         private int? _ExerciseId;
-        private ColeStewart.MyWorkout.Web.Models.ExerciseDtoGen _Exercise;
-        private int? _WorkoutSetId;
+        private int? _BracketId;
         private int? _Reps;
         private int? _Time;
+        private int? _Weight;
 
         public int? SetExerciseId
         {
@@ -29,15 +29,10 @@ namespace ColeStewart.MyWorkout.Web.Models
             get => _ExerciseId;
             set { _ExerciseId = value; Changed(nameof(ExerciseId)); }
         }
-        public ColeStewart.MyWorkout.Web.Models.ExerciseDtoGen Exercise
+        public int? BracketId
         {
-            get => _Exercise;
-            set { _Exercise = value; Changed(nameof(Exercise)); }
-        }
-        public int? WorkoutSetId
-        {
-            get => _WorkoutSetId;
-            set { _WorkoutSetId = value; Changed(nameof(WorkoutSetId)); }
+            get => _BracketId;
+            set { _BracketId = value; Changed(nameof(BracketId)); }
         }
         public int? Reps
         {
@@ -48,6 +43,11 @@ namespace ColeStewart.MyWorkout.Web.Models
         {
             get => _Time;
             set { _Time = value; Changed(nameof(Time)); }
+        }
+        public int? Weight
+        {
+            get => _Weight;
+            set { _Weight = value; Changed(nameof(Weight)); }
         }
 
         /// <summary>
@@ -60,12 +60,10 @@ namespace ColeStewart.MyWorkout.Web.Models
 
             this.SetExerciseId = obj.SetExerciseId;
             this.ExerciseId = obj.ExerciseId;
-            this.WorkoutSetId = obj.WorkoutSetId;
+            this.BracketId = obj.BracketId;
             this.Reps = obj.Reps;
             this.Time = obj.Time;
-            if (tree == null || tree[nameof(this.Exercise)] != null)
-                this.Exercise = obj.Exercise.MapToDto<ColeStewart.MyWorkout.Data.Models.Exercise, ExerciseDtoGen>(context, tree?[nameof(this.Exercise)]);
-
+            this.Weight = obj.Weight;
         }
 
         /// <summary>
@@ -79,9 +77,10 @@ namespace ColeStewart.MyWorkout.Web.Models
 
             if (ShouldMapTo(nameof(SetExerciseId))) entity.SetExerciseId = (SetExerciseId ?? entity.SetExerciseId);
             if (ShouldMapTo(nameof(ExerciseId))) entity.ExerciseId = (ExerciseId ?? entity.ExerciseId);
-            if (ShouldMapTo(nameof(WorkoutSetId))) entity.WorkoutSetId = (WorkoutSetId ?? entity.WorkoutSetId);
+            if (ShouldMapTo(nameof(BracketId))) entity.BracketId = (BracketId ?? entity.BracketId);
             if (ShouldMapTo(nameof(Reps))) entity.Reps = Reps;
             if (ShouldMapTo(nameof(Time))) entity.Time = Time;
+            if (ShouldMapTo(nameof(Weight))) entity.Weight = Weight;
         }
 
         /// <summary>

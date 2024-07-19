@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ColeStewart.MyWorkout.Data.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20240719030139_BracketNameChange")]
-    partial class BracketNameChange
+    [Migration("20240719031112_Brackets")]
+    partial class Brackets
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -78,7 +78,7 @@ namespace ColeStewart.MyWorkout.Data.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("SetExerciseId"));
 
-                    b.Property<int?>("BracketId")
+                    b.Property<int>("BracketId")
                         .HasColumnType("int");
 
                     b.Property<int>("ExerciseId")
@@ -90,14 +90,12 @@ namespace ColeStewart.MyWorkout.Data.Migrations
                     b.Property<int?>("Time")
                         .HasColumnType("int");
 
-                    b.Property<int>("WorkoutSetId")
+                    b.Property<int?>("Weight")
                         .HasColumnType("int");
 
                     b.HasKey("SetExerciseId");
 
                     b.HasIndex("BracketId");
-
-                    b.HasIndex("ExerciseId");
 
                     b.ToTable("SetExercises");
                 });
@@ -179,15 +177,8 @@ namespace ColeStewart.MyWorkout.Data.Migrations
                     b.HasOne("ColeStewart.MyWorkout.Data.Models.Bracket", null)
                         .WithMany("Exercise")
                         .HasForeignKey("BracketId")
-                        .OnDelete(DeleteBehavior.Restrict);
-
-                    b.HasOne("ColeStewart.MyWorkout.Data.Models.Exercise", "Exercise")
-                        .WithMany()
-                        .HasForeignKey("ExerciseId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
-
-                    b.Navigation("Exercise");
                 });
 
             modelBuilder.Entity("ColeStewart.MyWorkout.Data.Models.Bracket", b =>

@@ -5,17 +5,21 @@
 namespace ColeStewart.MyWorkout.Data.Migrations
 {
     /// <inheritdoc />
-    public partial class BracketNameChange : Migration
+    public partial class Brackets : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropForeignKey(
+                name: "FK_SetExercises_Exercises_ExerciseId",
+                table: "SetExercises");
+
+            migrationBuilder.DropForeignKey(
                 name: "FK_SetExercises_WorkoutSets_WorkoutSetId",
                 table: "SetExercises");
 
             migrationBuilder.DropIndex(
-                name: "IX_SetExercises_WorkoutSetId",
+                name: "IX_SetExercises_ExerciseId",
                 table: "SetExercises");
 
             migrationBuilder.RenameColumn(
@@ -28,16 +32,21 @@ namespace ColeStewart.MyWorkout.Data.Migrations
                 table: "WorkoutSets",
                 newName: "BracketId");
 
+            migrationBuilder.RenameColumn(
+                name: "WorkoutSetId",
+                table: "SetExercises",
+                newName: "BracketId");
+
+            migrationBuilder.RenameIndex(
+                name: "IX_SetExercises_WorkoutSetId",
+                table: "SetExercises",
+                newName: "IX_SetExercises_BracketId");
+
             migrationBuilder.AddColumn<int>(
-                name: "BracketId",
+                name: "Weight",
                 table: "SetExercises",
                 type: "int",
                 nullable: true);
-
-            migrationBuilder.CreateIndex(
-                name: "IX_SetExercises_BracketId",
-                table: "SetExercises",
-                column: "BracketId");
 
             migrationBuilder.AddForeignKey(
                 name: "FK_SetExercises_WorkoutSets_BracketId",
@@ -55,12 +64,8 @@ namespace ColeStewart.MyWorkout.Data.Migrations
                 name: "FK_SetExercises_WorkoutSets_BracketId",
                 table: "SetExercises");
 
-            migrationBuilder.DropIndex(
-                name: "IX_SetExercises_BracketId",
-                table: "SetExercises");
-
             migrationBuilder.DropColumn(
-                name: "BracketId",
+                name: "Weight",
                 table: "SetExercises");
 
             migrationBuilder.RenameColumn(
@@ -73,10 +78,28 @@ namespace ColeStewart.MyWorkout.Data.Migrations
                 table: "WorkoutSets",
                 newName: "WorkoutSetId");
 
-            migrationBuilder.CreateIndex(
-                name: "IX_SetExercises_WorkoutSetId",
+            migrationBuilder.RenameColumn(
+                name: "BracketId",
                 table: "SetExercises",
-                column: "WorkoutSetId");
+                newName: "WorkoutSetId");
+
+            migrationBuilder.RenameIndex(
+                name: "IX_SetExercises_BracketId",
+                table: "SetExercises",
+                newName: "IX_SetExercises_WorkoutSetId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_SetExercises_ExerciseId",
+                table: "SetExercises",
+                column: "ExerciseId");
+
+            migrationBuilder.AddForeignKey(
+                name: "FK_SetExercises_Exercises_ExerciseId",
+                table: "SetExercises",
+                column: "ExerciseId",
+                principalTable: "Exercises",
+                principalColumn: "ExerciseId",
+                onDelete: ReferentialAction.Restrict);
 
             migrationBuilder.AddForeignKey(
                 name: "FK_SetExercises_WorkoutSets_WorkoutSetId",

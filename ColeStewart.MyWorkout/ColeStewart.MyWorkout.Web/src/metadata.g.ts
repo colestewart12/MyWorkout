@@ -151,32 +151,18 @@ export const SetExercise = domain.types.SetExercise = {
       name: "exerciseId",
       displayName: "Exercise Id",
       type: "number",
-      role: "foreignKey",
-      get principalKey() { return (domain.types.Exercise as ModelType).props.exerciseId as PrimaryKeyProperty },
-      get principalType() { return (domain.types.Exercise as ModelType) },
-      get navigationProp() { return (domain.types.SetExercise as ModelType).props.exercise as ModelReferenceNavigationProperty },
-      hidden: 3 as HiddenAreas,
+      role: "value",
       rules: {
-        required: val => val != null || "Exercise is required.",
+        required: val => val != null || "Exercise Id is required.",
       }
     },
-    exercise: {
-      name: "exercise",
-      displayName: "Exercise",
-      type: "model",
-      get typeDef() { return (domain.types.Exercise as ModelType) },
-      role: "referenceNavigation",
-      get foreignKey() { return (domain.types.SetExercise as ModelType).props.exerciseId as ForeignKeyProperty },
-      get principalKey() { return (domain.types.Exercise as ModelType).props.exerciseId as PrimaryKeyProperty },
-      dontSerialize: true,
-    },
-    workoutSetId: {
-      name: "workoutSetId",
-      displayName: "Workout Set Id",
+    bracketId: {
+      name: "bracketId",
+      displayName: "Bracket Id",
       type: "number",
       role: "value",
       rules: {
-        required: val => val != null || "Workout Set Id is required.",
+        required: val => val != null || "Bracket Id is required.",
       }
     },
     reps: {
@@ -188,6 +174,12 @@ export const SetExercise = domain.types.SetExercise = {
     time: {
       name: "time",
       displayName: "Time",
+      type: "number",
+      role: "value",
+    },
+    weight: {
+      name: "weight",
+      displayName: "Weight",
       type: "number",
       role: "value",
     },

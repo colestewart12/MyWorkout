@@ -50,10 +50,10 @@ export class ExerciseListViewModel extends ListViewModel<$models.Exercise, $apiC
 export interface SetExerciseViewModel extends $models.SetExercise {
   setExerciseId: number | null;
   exerciseId: number | null;
-  exercise: ExerciseViewModel | null;
-  workoutSetId: number | null;
+  bracketId: number | null;
   reps: number | null;
   time: number | null;
+  weight: number | null;
 }
 export class SetExerciseViewModel extends ViewModel<$models.SetExercise, $apiClients.SetExerciseApiClient, number> implements $models.SetExercise  {
   
