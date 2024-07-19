@@ -2,7 +2,9 @@
   <CardColorBar color="primary" divider>
     <template v-slot:title>
       <div class="d-flex">
-        <h2 class="wrap-break">{{ exercise.name }}</h2>
+        <router-link :to="`/exercise/${exercise.exerciseId}`">
+          <h2>{{ exercise.name }}</h2>
+        </router-link>
         <v-spacer />
         <v-btn
           @click="editExercise = true"

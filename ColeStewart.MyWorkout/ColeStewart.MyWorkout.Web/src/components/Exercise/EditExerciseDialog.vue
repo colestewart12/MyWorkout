@@ -1,20 +1,6 @@
 <template>
   <Dialog v-model="modelValue" @update:modelValue="cancel" :title="titleText">
     <template v-slot:menuItems v-if="!isNew">
-      <v-list-item
-        :to="`/admin/audit-logs?type=Exercise&key=${exercise.exerciseId}`"
-        target="_blank"
-      >
-        <template v-slot:prepend>
-          <v-icon
-            size="small"
-            color="primary"
-            class="mr-4"
-            icon="fas fa-list-timeline"
-          />
-        </template>
-        Audit Logs
-      </v-list-item>
       <v-list-item @click="dialogOpen = true">
         <template v-slot:prepend>
           <v-icon size="small" color="error" class="mr-4" icon="fas fa-trash" />
@@ -27,25 +13,30 @@
         :loaders="{ '': [exercise.$save, exercise.$delete, exercise.$load] }"
       />
       <v-row>
-        <v-col cols="6" class="mb-4">
+        <v-col cols="6">
           <c-input
             :model="exercise"
             for="name"
             label="Exercise Name"
             hide-details="auto"
             autofocus
+            class="mb-4"
           />
           <c-input
             :model="exercise"
             for="description"
             label="Description"
             hide-details="auto"
-            multi-line/>
-            <c-input
-              :model="exercise"
-              for="difficulty"
-              label="Difficulty"
-              hide-details="auto"/>
+            multi-line
+            class="mb-4"
+          />
+          <c-input
+            :model="exercise"
+            for="difficulty"
+            label="Difficulty"
+            hide-details="auto"
+            class="mb-4"
+          />
         </v-col>
       </v-row>
     </v-form>
