@@ -1,24 +1,19 @@
 <template>
-  <v-card variant="tonal" class="mx-auto my-8" elevation="16" max-width="620">
-    <div>
-      <v-card-title class="exercise-card-title">{{
-        exercise.name
-      }}</v-card-title
-      ><v-spacer />
-      <v-btn
-        @click="editExercise = true"
-        color="primary"
-        aria-label="Edit exercise"
-        icon="fas fa-pencil"
-        variant="tonal"
-        size="small"
-      />
-    </div>
-  </v-card>
-  <EditExerciseDialog
-    v-model="editExercise"
-    :exercise="exercise"
-  ></EditExerciseDialog>
+  <div>
+    <v-card variant="tonal" class="mx-auto my-8" elevation="16" max-width="620">
+      <div>
+        <v-card-title
+          class="exercise-card-title"
+          @click="editExercise = true"
+          >{{ exercise.name }}</v-card-title
+        >
+      </div>
+    </v-card>
+    <EditExerciseDialog
+      v-model="editExercise"
+      :exercise="exercise"
+    ></EditExerciseDialog>
+  </div>
 </template>
 
 <script setup lang="ts">

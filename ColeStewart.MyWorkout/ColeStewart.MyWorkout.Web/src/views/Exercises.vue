@@ -12,7 +12,7 @@
           Add Exercise
         </v-btn>
       </v-col>
-      <EditExerciseDialog v-model="addExercise" :exercise="newExercise"/>
+      <EditExerciseDialog v-model="addExercise" :exercise="newExercise" />
     </v-row>
     <v-row class="mt-4">
       <v-col v-for="exercise in exercises.$items" :key="exercise.exerciseId!">
@@ -23,7 +23,6 @@
 </template>
 
 <script setup lang="ts">
-import ExerciseCard from "@/components/Exercise/ExerciseCard.vue";
 import { ExerciseListViewModel, ExerciseViewModel } from "@/viewmodels.g";
 
 const exercises = new ExerciseListViewModel();
