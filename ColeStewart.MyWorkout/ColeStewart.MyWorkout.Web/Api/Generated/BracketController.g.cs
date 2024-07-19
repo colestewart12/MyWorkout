@@ -21,51 +21,51 @@ using System.Threading.Tasks;
 
 namespace ColeStewart.MyWorkout.Web.Api
 {
-    [Route("api/WorkoutSet")]
+    [Route("api/Bracket")]
     [Authorize]
     [ServiceFilter(typeof(IApiActionFilter))]
-    public partial class WorkoutSetController
-        : BaseApiController<ColeStewart.MyWorkout.Data.Models.WorkoutSet, WorkoutSetDtoGen, ColeStewart.MyWorkout.Data.AppDbContext>
+    public partial class BracketController
+        : BaseApiController<ColeStewart.MyWorkout.Data.Models.Bracket, BracketDtoGen, ColeStewart.MyWorkout.Data.AppDbContext>
     {
-        public WorkoutSetController(CrudContext<ColeStewart.MyWorkout.Data.AppDbContext> context) : base(context)
+        public BracketController(CrudContext<ColeStewart.MyWorkout.Data.AppDbContext> context) : base(context)
         {
-            GeneratedForClassViewModel = context.ReflectionRepository.GetClassViewModel<ColeStewart.MyWorkout.Data.Models.WorkoutSet>();
+            GeneratedForClassViewModel = context.ReflectionRepository.GetClassViewModel<ColeStewart.MyWorkout.Data.Models.Bracket>();
         }
 
         [HttpGet("get/{id}")]
         [Authorize]
-        public virtual Task<ItemResult<WorkoutSetDtoGen>> Get(
+        public virtual Task<ItemResult<BracketDtoGen>> Get(
             int id,
             DataSourceParameters parameters,
-            IDataSource<ColeStewart.MyWorkout.Data.Models.WorkoutSet> dataSource)
+            IDataSource<ColeStewart.MyWorkout.Data.Models.Bracket> dataSource)
             => GetImplementation(id, parameters, dataSource);
 
         [HttpGet("list")]
         [Authorize]
-        public virtual Task<ListResult<WorkoutSetDtoGen>> List(
+        public virtual Task<ListResult<BracketDtoGen>> List(
             ListParameters parameters,
-            IDataSource<ColeStewart.MyWorkout.Data.Models.WorkoutSet> dataSource)
+            IDataSource<ColeStewart.MyWorkout.Data.Models.Bracket> dataSource)
             => ListImplementation(parameters, dataSource);
 
         [HttpGet("count")]
         [Authorize]
         public virtual Task<ItemResult<int>> Count(
             FilterParameters parameters,
-            IDataSource<ColeStewart.MyWorkout.Data.Models.WorkoutSet> dataSource)
+            IDataSource<ColeStewart.MyWorkout.Data.Models.Bracket> dataSource)
             => CountImplementation(parameters, dataSource);
 
         [HttpPost("save")]
         [Authorize]
-        public virtual Task<ItemResult<WorkoutSetDtoGen>> Save(
-            [FromForm] WorkoutSetDtoGen dto,
+        public virtual Task<ItemResult<BracketDtoGen>> Save(
+            [FromForm] BracketDtoGen dto,
             [FromQuery] DataSourceParameters parameters,
-            IDataSource<ColeStewart.MyWorkout.Data.Models.WorkoutSet> dataSource,
-            IBehaviors<ColeStewart.MyWorkout.Data.Models.WorkoutSet> behaviors)
+            IDataSource<ColeStewart.MyWorkout.Data.Models.Bracket> dataSource,
+            IBehaviors<ColeStewart.MyWorkout.Data.Models.Bracket> behaviors)
             => SaveImplementation(dto, parameters, dataSource, behaviors);
 
         [HttpPost("bulkSave")]
         [Authorize]
-        public virtual Task<ItemResult<WorkoutSetDtoGen>> BulkSave(
+        public virtual Task<ItemResult<BracketDtoGen>> BulkSave(
             [FromBody] BulkSaveRequest dto,
             [FromQuery] DataSourceParameters parameters,
             [FromServices] IDataSourceFactory dataSourceFactory,
@@ -74,10 +74,10 @@ namespace ColeStewart.MyWorkout.Web.Api
 
         [HttpPost("delete/{id}")]
         [Authorize]
-        public virtual Task<ItemResult<WorkoutSetDtoGen>> Delete(
+        public virtual Task<ItemResult<BracketDtoGen>> Delete(
             int id,
-            IBehaviors<ColeStewart.MyWorkout.Data.Models.WorkoutSet> behaviors,
-            IDataSource<ColeStewart.MyWorkout.Data.Models.WorkoutSet> dataSource)
+            IBehaviors<ColeStewart.MyWorkout.Data.Models.Bracket> behaviors,
+            IDataSource<ColeStewart.MyWorkout.Data.Models.Bracket> dataSource)
             => DeleteImplementation(id, new DataSourceParameters(), dataSource, behaviors);
     }
 }

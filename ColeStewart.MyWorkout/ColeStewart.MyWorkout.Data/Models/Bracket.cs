@@ -5,10 +5,10 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace ColeStewart.MyWorkout.Data.Models;
-public class WorkoutSet
+public class Bracket
 {
-    public int WorkoutSetId { get; set; }
-    public string? WorkoutName { get; set; }
+    public int BracketId { get; set; }
+    public string? BracketName { get; set; }
     [Required]
     public int WorkoutId { get; set; }
     public ICollection<SetExercise> Exercise { get; set; } = new List<SetExercise>();

@@ -3,6 +3,28 @@ import * as $models from './models.g'
 import * as $apiClients from './api-clients.g'
 import { ViewModel, ListViewModel, ServiceViewModel, DeepPartial, defineProps } from 'coalesce-vue/lib/viewmodel'
 
+export interface BracketViewModel extends $models.Bracket {
+  bracketId: number | null;
+  bracketName: string | null;
+  workoutId: number | null;
+  exercise: SetExerciseViewModel[] | null;
+}
+export class BracketViewModel extends ViewModel<$models.Bracket, $apiClients.BracketApiClient, number> implements $models.Bracket  {
+  
+  constructor(initialData?: DeepPartial<$models.Bracket> | null) {
+    super($metadata.Bracket, new $apiClients.BracketApiClient(), initialData)
+  }
+}
+defineProps(BracketViewModel, $metadata.Bracket)
+
+export class BracketListViewModel extends ListViewModel<$models.Bracket, $apiClients.BracketApiClient, BracketViewModel> {
+  
+  constructor() {
+    super($metadata.Bracket, new $apiClients.BracketApiClient())
+  }
+}
+
+
 export interface ExerciseViewModel extends $models.Exercise {
   exerciseId: number | null;
   name: string | null;
@@ -28,10 +50,10 @@ export class ExerciseListViewModel extends ListViewModel<$models.Exercise, $apiC
 export interface SetExerciseViewModel extends $models.SetExercise {
   setExerciseId: number | null;
   exerciseId: number | null;
-  exercise: ExerciseViewModel | null;
-  workoutSetId: number | null;
+  bracketId: number | null;
   reps: number | null;
   time: number | null;
+  weight: number | null;
 }
 export class SetExerciseViewModel extends ViewModel<$models.SetExercise, $apiClients.SetExerciseApiClient, number> implements $models.SetExercise  {
   
@@ -96,7 +118,7 @@ export interface WorkoutViewModel extends $models.Workout {
   workoutId: number | null;
   title: string | null;
   description: string | null;
-  workoutSets: WorkoutSetViewModel[] | null;
+  brackets: BracketViewModel[] | null;
 }
 export class WorkoutViewModel extends ViewModel<$models.Workout, $apiClients.WorkoutApiClient, number> implements $models.Workout  {
   
@@ -114,43 +136,21 @@ export class WorkoutListViewModel extends ListViewModel<$models.Workout, $apiCli
 }
 
 
-export interface WorkoutSetViewModel extends $models.WorkoutSet {
-  workoutSetId: number | null;
-  workoutName: string | null;
-  workoutId: number | null;
-  exercise: SetExerciseViewModel[] | null;
-}
-export class WorkoutSetViewModel extends ViewModel<$models.WorkoutSet, $apiClients.WorkoutSetApiClient, number> implements $models.WorkoutSet  {
-  
-  constructor(initialData?: DeepPartial<$models.WorkoutSet> | null) {
-    super($metadata.WorkoutSet, new $apiClients.WorkoutSetApiClient(), initialData)
-  }
-}
-defineProps(WorkoutSetViewModel, $metadata.WorkoutSet)
-
-export class WorkoutSetListViewModel extends ListViewModel<$models.WorkoutSet, $apiClients.WorkoutSetApiClient, WorkoutSetViewModel> {
-  
-  constructor() {
-    super($metadata.WorkoutSet, new $apiClients.WorkoutSetApiClient())
-  }
-}
-
-
 const viewModelTypeLookup = ViewModel.typeLookup = {
+  Bracket: BracketViewModel,
   Exercise: ExerciseViewModel,
   SetExercise: SetExerciseViewModel,
   User: UserViewModel,
   Widget: WidgetViewModel,
   Workout: WorkoutViewModel,
-  WorkoutSet: WorkoutSetViewModel,
 }
 const listViewModelTypeLookup = ListViewModel.typeLookup = {
+  Bracket: BracketListViewModel,
   Exercise: ExerciseListViewModel,
   SetExercise: SetExerciseListViewModel,
   User: UserListViewModel,
   Widget: WidgetListViewModel,
   Workout: WorkoutListViewModel,
-  WorkoutSet: WorkoutSetListViewModel,
 }
 const serviceViewModelTypeLookup = ServiceViewModel.typeLookup = {
 }

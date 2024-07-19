@@ -29,6 +29,57 @@ export const WidgetCategory = domain.enums.WidgetCategory = {
   },
   ]),
 }
+export const Bracket = domain.types.Bracket = {
+  name: "Bracket",
+  displayName: "Bracket",
+  get displayProp() { return this.props.bracketId }, 
+  type: "model",
+  controllerRoute: "Bracket",
+  get keyProp() { return this.props.bracketId }, 
+  behaviorFlags: 7 as BehaviorFlags,
+  props: {
+    bracketId: {
+      name: "bracketId",
+      displayName: "Bracket Id",
+      type: "number",
+      role: "primaryKey",
+      hidden: 3 as HiddenAreas,
+    },
+    bracketName: {
+      name: "bracketName",
+      displayName: "Bracket Name",
+      type: "string",
+      role: "value",
+    },
+    workoutId: {
+      name: "workoutId",
+      displayName: "Workout Id",
+      type: "number",
+      role: "value",
+      rules: {
+        required: val => val != null || "Workout Id is required.",
+      }
+    },
+    exercise: {
+      name: "exercise",
+      displayName: "Exercise",
+      type: "collection",
+      itemType: {
+        name: "$collectionItem",
+        displayName: "",
+        role: "value",
+        type: "model",
+        get typeDef() { return (domain.types.SetExercise as ModelType) },
+      },
+      role: "value",
+      dontSerialize: true,
+    },
+  },
+  methods: {
+  },
+  dataSources: {
+  },
+}
 export const Exercise = domain.types.Exercise = {
   name: "Exercise",
   displayName: "Exercise",
@@ -100,32 +151,18 @@ export const SetExercise = domain.types.SetExercise = {
       name: "exerciseId",
       displayName: "Exercise Id",
       type: "number",
-      role: "foreignKey",
-      get principalKey() { return (domain.types.Exercise as ModelType).props.exerciseId as PrimaryKeyProperty },
-      get principalType() { return (domain.types.Exercise as ModelType) },
-      get navigationProp() { return (domain.types.SetExercise as ModelType).props.exercise as ModelReferenceNavigationProperty },
-      hidden: 3 as HiddenAreas,
+      role: "value",
       rules: {
-        required: val => val != null || "Exercise is required.",
+        required: val => val != null || "Exercise Id is required.",
       }
     },
-    exercise: {
-      name: "exercise",
-      displayName: "Exercise",
-      type: "model",
-      get typeDef() { return (domain.types.Exercise as ModelType) },
-      role: "referenceNavigation",
-      get foreignKey() { return (domain.types.SetExercise as ModelType).props.exerciseId as ForeignKeyProperty },
-      get principalKey() { return (domain.types.Exercise as ModelType).props.exerciseId as PrimaryKeyProperty },
-      dontSerialize: true,
-    },
-    workoutSetId: {
-      name: "workoutSetId",
-      displayName: "Workout Set Id",
+    bracketId: {
+      name: "bracketId",
+      displayName: "Bracket Id",
       type: "number",
       role: "value",
       rules: {
-        required: val => val != null || "Workout Set Id is required.",
+        required: val => val != null || "Bracket Id is required.",
       }
     },
     reps: {
@@ -137,6 +174,12 @@ export const SetExercise = domain.types.SetExercise = {
     time: {
       name: "time",
       displayName: "Time",
+      type: "number",
+      role: "value",
+    },
+    weight: {
+      name: "weight",
+      displayName: "Weight",
       type: "number",
       role: "value",
     },
@@ -263,67 +306,16 @@ export const Workout = domain.types.Workout = {
       type: "string",
       role: "value",
     },
-    workoutSets: {
-      name: "workoutSets",
-      displayName: "Workout Sets",
+    brackets: {
+      name: "brackets",
+      displayName: "Brackets",
       type: "collection",
       itemType: {
         name: "$collectionItem",
         displayName: "",
         role: "value",
         type: "model",
-        get typeDef() { return (domain.types.WorkoutSet as ModelType) },
-      },
-      role: "value",
-      dontSerialize: true,
-    },
-  },
-  methods: {
-  },
-  dataSources: {
-  },
-}
-export const WorkoutSet = domain.types.WorkoutSet = {
-  name: "WorkoutSet",
-  displayName: "Workout Set",
-  get displayProp() { return this.props.workoutSetId }, 
-  type: "model",
-  controllerRoute: "WorkoutSet",
-  get keyProp() { return this.props.workoutSetId }, 
-  behaviorFlags: 7 as BehaviorFlags,
-  props: {
-    workoutSetId: {
-      name: "workoutSetId",
-      displayName: "Workout Set Id",
-      type: "number",
-      role: "primaryKey",
-      hidden: 3 as HiddenAreas,
-    },
-    workoutName: {
-      name: "workoutName",
-      displayName: "Workout Name",
-      type: "string",
-      role: "value",
-    },
-    workoutId: {
-      name: "workoutId",
-      displayName: "Workout Id",
-      type: "number",
-      role: "value",
-      rules: {
-        required: val => val != null || "Workout Id is required.",
-      }
-    },
-    exercise: {
-      name: "exercise",
-      displayName: "Exercise",
-      type: "collection",
-      itemType: {
-        name: "$collectionItem",
-        displayName: "",
-        role: "value",
-        type: "model",
-        get typeDef() { return (domain.types.SetExercise as ModelType) },
+        get typeDef() { return (domain.types.Bracket as ModelType) },
       },
       role: "value",
       dontSerialize: true,
@@ -340,12 +332,12 @@ interface AppDomain extends Domain {
     WidgetCategory: typeof WidgetCategory
   }
   types: {
+    Bracket: typeof Bracket
     Exercise: typeof Exercise
     SetExercise: typeof SetExercise
     User: typeof User
     Widget: typeof Widget
     Workout: typeof Workout
-    WorkoutSet: typeof WorkoutSet
   }
   services: {
   }

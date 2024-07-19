@@ -35,8 +35,13 @@ export default createRouter({
       path: "/exercise",
       name: "exercise-page",
       component: () => import("@/views/Exercises.vue"),
-    }
-    ,
+    },
+    {
+      path: "/exercise/:exerciseId",
+      name: "exercise-details",
+      component: () => import("@/views/Exercise.vue"),
+      props: (route) => ({ exerciseId: +route.params.exerciseId }),
+    },
 
     // Coalesce admin routes
     {

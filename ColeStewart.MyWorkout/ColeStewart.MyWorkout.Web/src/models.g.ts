@@ -8,6 +8,33 @@ export enum WidgetCategory {
 }
 
 
+export interface Bracket extends Model<typeof metadata.Bracket> {
+  bracketId: number | null
+  bracketName: string | null
+  workoutId: number | null
+  exercise: SetExercise[] | null
+}
+export class Bracket {
+  
+  /** Mutates the input object and its descendents into a valid Bracket implementation. */
+  static convert(data?: Partial<Bracket>): Bracket {
+    return convertToModel(data || {}, metadata.Bracket) 
+  }
+  
+  /** Maps the input object and its descendents to a new, valid Bracket implementation. */
+  static map(data?: Partial<Bracket>): Bracket {
+    return mapToModel(data || {}, metadata.Bracket) 
+  }
+  
+  static [Symbol.hasInstance](x: any) { return x?.$metadata === metadata.Bracket; }
+  
+  /** Instantiate a new Bracket, optionally basing it on the given data. */
+  constructor(data?: Partial<Bracket> | {[k: string]: any}) {
+    Object.assign(this, Bracket.map(data || {}));
+  }
+}
+
+
 export interface Exercise extends Model<typeof metadata.Exercise> {
   exerciseId: number | null
   name: string | null
@@ -38,10 +65,10 @@ export class Exercise {
 export interface SetExercise extends Model<typeof metadata.SetExercise> {
   setExerciseId: number | null
   exerciseId: number | null
-  exercise: Exercise | null
-  workoutSetId: number | null
+  bracketId: number | null
   reps: number | null
   time: number | null
+  weight: number | null
 }
 export class SetExercise {
   
@@ -121,7 +148,7 @@ export interface Workout extends Model<typeof metadata.Workout> {
   workoutId: number | null
   title: string | null
   description: string | null
-  workoutSets: WorkoutSet[] | null
+  brackets: Bracket[] | null
 }
 export class Workout {
   
@@ -140,33 +167,6 @@ export class Workout {
   /** Instantiate a new Workout, optionally basing it on the given data. */
   constructor(data?: Partial<Workout> | {[k: string]: any}) {
     Object.assign(this, Workout.map(data || {}));
-  }
-}
-
-
-export interface WorkoutSet extends Model<typeof metadata.WorkoutSet> {
-  workoutSetId: number | null
-  workoutName: string | null
-  workoutId: number | null
-  exercise: SetExercise[] | null
-}
-export class WorkoutSet {
-  
-  /** Mutates the input object and its descendents into a valid WorkoutSet implementation. */
-  static convert(data?: Partial<WorkoutSet>): WorkoutSet {
-    return convertToModel(data || {}, metadata.WorkoutSet) 
-  }
-  
-  /** Maps the input object and its descendents to a new, valid WorkoutSet implementation. */
-  static map(data?: Partial<WorkoutSet>): WorkoutSet {
-    return mapToModel(data || {}, metadata.WorkoutSet) 
-  }
-  
-  static [Symbol.hasInstance](x: any) { return x?.$metadata === metadata.WorkoutSet; }
-  
-  /** Instantiate a new WorkoutSet, optionally basing it on the given data. */
-  constructor(data?: Partial<WorkoutSet> | {[k: string]: any}) {
-    Object.assign(this, WorkoutSet.map(data || {}));
   }
 }
 

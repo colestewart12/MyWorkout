@@ -10,9 +10,9 @@ public class SetExercise
     public int SetExerciseId { get; set; }
     [Required]
     public int ExerciseId { get; set; }
-    public Exercise? Exercise { get; set; }
     [Required]
-    public int WorkoutSetId { get; set; }
+    public int BracketId { get; set; }
     public int? Reps { get; set; }
     public int? Time { get; set; }
+    public int? Weight { get; set; }
 }
