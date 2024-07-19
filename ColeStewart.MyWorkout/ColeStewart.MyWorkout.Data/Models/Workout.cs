@@ -11,5 +11,5 @@ public class Workout
     [Required]
     public required string Title { get; set; }
     public string? Description { get; set; }
-    public ICollection<WorkoutSet> WorkoutSets { get; set; } = new List<WorkoutSet>();
+    public ICollection<Bracket>? Brackets { get; set; }
 }
