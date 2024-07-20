@@ -12,7 +12,7 @@ export interface Bracket extends Model<typeof metadata.Bracket> {
   bracketId: number | null
   bracketName: string | null
   workoutId: number | null
-  exercise: SetExercise[] | null
+  exercises: BracketExercise[] | null
 }
 export class Bracket {
   
@@ -31,6 +31,33 @@ export class Bracket {
   /** Instantiate a new Bracket, optionally basing it on the given data. */
   constructor(data?: Partial<Bracket> | {[k: string]: any}) {
     Object.assign(this, Bracket.map(data || {}));
+  }
+}
+
+
+export interface BracketExercise extends Model<typeof metadata.BracketExercise> {
+  bracketExerciseId: number | null
+  exerciseId: number | null
+  bracketId: number | null
+  weight: number | null
+}
+export class BracketExercise {
+  
+  /** Mutates the input object and its descendents into a valid BracketExercise implementation. */
+  static convert(data?: Partial<BracketExercise>): BracketExercise {
+    return convertToModel(data || {}, metadata.BracketExercise) 
+  }
+  
+  /** Maps the input object and its descendents to a new, valid BracketExercise implementation. */
+  static map(data?: Partial<BracketExercise>): BracketExercise {
+    return mapToModel(data || {}, metadata.BracketExercise) 
+  }
+  
+  static [Symbol.hasInstance](x: any) { return x?.$metadata === metadata.BracketExercise; }
+  
+  /** Instantiate a new BracketExercise, optionally basing it on the given data. */
+  constructor(data?: Partial<BracketExercise> | {[k: string]: any}) {
+    Object.assign(this, BracketExercise.map(data || {}));
   }
 }
 
@@ -58,35 +85,6 @@ export class Exercise {
   /** Instantiate a new Exercise, optionally basing it on the given data. */
   constructor(data?: Partial<Exercise> | {[k: string]: any}) {
     Object.assign(this, Exercise.map(data || {}));
-  }
-}
-
-
-export interface SetExercise extends Model<typeof metadata.SetExercise> {
-  setExerciseId: number | null
-  exerciseId: number | null
-  bracketId: number | null
-  reps: number | null
-  time: number | null
-  weight: number | null
-}
-export class SetExercise {
-  
-  /** Mutates the input object and its descendents into a valid SetExercise implementation. */
-  static convert(data?: Partial<SetExercise>): SetExercise {
-    return convertToModel(data || {}, metadata.SetExercise) 
-  }
-  
-  /** Maps the input object and its descendents to a new, valid SetExercise implementation. */
-  static map(data?: Partial<SetExercise>): SetExercise {
-    return mapToModel(data || {}, metadata.SetExercise) 
-  }
-  
-  static [Symbol.hasInstance](x: any) { return x?.$metadata === metadata.SetExercise; }
-  
-  /** Instantiate a new SetExercise, optionally basing it on the given data. */
-  constructor(data?: Partial<SetExercise> | {[k: string]: any}) {
-    Object.assign(this, SetExercise.map(data || {}));
   }
 }
 
@@ -167,6 +165,14 @@ export class Workout {
   /** Instantiate a new Workout, optionally basing it on the given data. */
   constructor(data?: Partial<Workout> | {[k: string]: any}) {
     Object.assign(this, Workout.map(data || {}));
+  }
+}
+export namespace Workout {
+  export namespace DataSources {
+    
+    export class WorkoutDataSource implements DataSource<typeof metadata.Workout.dataSources.workoutDataSource> {
+      readonly $metadata = metadata.Workout.dataSources.workoutDataSource
+    }
   }
 }
 

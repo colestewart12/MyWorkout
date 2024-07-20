@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ColeStewart.MyWorkout.Data.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20240719031112_Brackets")]
+    [Migration("20240720061209_Brackets")]
     partial class Brackets
     {
         /// <inheritdoc />
@@ -43,7 +43,7 @@ namespace ColeStewart.MyWorkout.Data.Migrations
 
                     b.HasIndex("WorkoutId");
 
-                    b.ToTable("WorkoutSets");
+                    b.ToTable("Brackets");
                 });
 
             modelBuilder.Entity("ColeStewart.MyWorkout.Data.Models.Exercise", b =>

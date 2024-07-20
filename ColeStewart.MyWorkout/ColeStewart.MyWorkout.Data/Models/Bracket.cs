@@ -11,5 +11,5 @@ public class Bracket
     public string? BracketName { get; set; }
     [Required]
     public int WorkoutId { get; set; }
-    public ICollection<SetExercise> Exercise { get; set; } = new List<SetExercise>();
+    public ICollection<BracketExercise>? Exercises { get; set; }
 }

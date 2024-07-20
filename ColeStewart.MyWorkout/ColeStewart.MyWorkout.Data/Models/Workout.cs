@@ -12,4 +12,14 @@ public class Workout
     public required string Title { get; set; }
     public string? Description { get; set; }
     public ICollection<Bracket>? Brackets { get; set; }
+
+    [DefaultDataSource]
+    public class WorkoutDataSource(CrudContext<AppDbContext> context) : StandardDataSource<Workout, AppDbContext>(context)
+    {
+        public override IQueryable<Workout> GetQuery(IDataSourceParameters parameters)
+        {
+            IQueryable<Workout> query = base.GetQuery(parameters);
+            return query.Include(w => w.Brackets);
+        }
+    }
 }

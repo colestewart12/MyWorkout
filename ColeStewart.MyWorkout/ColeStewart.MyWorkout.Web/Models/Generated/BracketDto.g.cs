@@ -15,7 +15,7 @@ namespace ColeStewart.MyWorkout.Web.Models
         private int? _BracketId;
         private string _BracketName;
         private int? _WorkoutId;
-        private System.Collections.Generic.ICollection<ColeStewart.MyWorkout.Web.Models.SetExerciseDtoGen> _Exercise;
+        private System.Collections.Generic.ICollection<ColeStewart.MyWorkout.Web.Models.BracketExerciseDtoGen> _Exercises;
 
         public int? BracketId
         {
@@ -32,10 +32,10 @@ namespace ColeStewart.MyWorkout.Web.Models
             get => _WorkoutId;
             set { _WorkoutId = value; Changed(nameof(WorkoutId)); }
         }
-        public System.Collections.Generic.ICollection<ColeStewart.MyWorkout.Web.Models.SetExerciseDtoGen> Exercise
+        public System.Collections.Generic.ICollection<ColeStewart.MyWorkout.Web.Models.BracketExerciseDtoGen> Exercises
         {
-            get => _Exercise;
-            set { _Exercise = value; Changed(nameof(Exercise)); }
+            get => _Exercises;
+            set { _Exercises = value; Changed(nameof(Exercises)); }
         }
 
         /// <summary>
@@ -49,16 +49,16 @@ namespace ColeStewart.MyWorkout.Web.Models
             this.BracketId = obj.BracketId;
             this.BracketName = obj.BracketName;
             this.WorkoutId = obj.WorkoutId;
-            var propValExercise = obj.Exercise;
-            if (propValExercise != null && (tree == null || tree[nameof(this.Exercise)] != null))
+            var propValExercises = obj.Exercises;
+            if (propValExercises != null && (tree == null || tree[nameof(this.Exercises)] != null))
             {
-                this.Exercise = propValExercise
-                    .OrderBy(f => f.SetExerciseId)
-                    .Select(f => f.MapToDto<ColeStewart.MyWorkout.Data.Models.SetExercise, SetExerciseDtoGen>(context, tree?[nameof(this.Exercise)])).ToList();
+                this.Exercises = propValExercises
+                    .OrderBy(f => f.BracketExerciseId)
+                    .Select(f => f.MapToDto<ColeStewart.MyWorkout.Data.Models.BracketExercise, BracketExerciseDtoGen>(context, tree?[nameof(this.Exercises)])).ToList();
             }
-            else if (propValExercise == null && tree?[nameof(this.Exercise)] != null)
+            else if (propValExercises == null && tree?[nameof(this.Exercises)] != null)
             {
-                this.Exercise = new SetExerciseDtoGen[0];
+                this.Exercises = new BracketExerciseDtoGen[0];
             }
 
         }

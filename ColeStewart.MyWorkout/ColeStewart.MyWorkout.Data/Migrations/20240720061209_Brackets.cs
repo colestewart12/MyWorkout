@@ -18,19 +18,12 @@ namespace ColeStewart.MyWorkout.Data.Migrations
                 name: "FK_SetExercises_WorkoutSets_WorkoutSetId",
                 table: "SetExercises");
 
+            migrationBuilder.DropTable(
+                name: "WorkoutSets");
+
             migrationBuilder.DropIndex(
                 name: "IX_SetExercises_ExerciseId",
                 table: "SetExercises");
-
-            migrationBuilder.RenameColumn(
-                name: "WorkoutName",
-                table: "WorkoutSets",
-                newName: "BracketName");
-
-            migrationBuilder.RenameColumn(
-                name: "WorkoutSetId",
-                table: "WorkoutSets",
-                newName: "BracketId");
 
             migrationBuilder.RenameColumn(
                 name: "WorkoutSetId",
@@ -48,11 +41,36 @@ namespace ColeStewart.MyWorkout.Data.Migrations
                 type: "int",
                 nullable: true);
 
+            migrationBuilder.CreateTable(
+                name: "Brackets",
+                columns: table => new
+                {
+                    BracketId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    BracketName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    WorkoutId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Brackets", x => x.BracketId);
+                    table.ForeignKey(
+                        name: "FK_Brackets_Workouts_WorkoutId",
+                        column: x => x.WorkoutId,
+                        principalTable: "Workouts",
+                        principalColumn: "WorkoutId",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Brackets_WorkoutId",
+                table: "Brackets",
+                column: "WorkoutId");
+
             migrationBuilder.AddForeignKey(
-                name: "FK_SetExercises_WorkoutSets_BracketId",
+                name: "FK_SetExercises_Brackets_BracketId",
                 table: "SetExercises",
                 column: "BracketId",
-                principalTable: "WorkoutSets",
+                principalTable: "Brackets",
                 principalColumn: "BracketId",
                 onDelete: ReferentialAction.Restrict);
         }
@@ -61,22 +79,15 @@ namespace ColeStewart.MyWorkout.Data.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropForeignKey(
-                name: "FK_SetExercises_WorkoutSets_BracketId",
+                name: "FK_SetExercises_Brackets_BracketId",
                 table: "SetExercises");
+
+            migrationBuilder.DropTable(
+                name: "Brackets");
 
             migrationBuilder.DropColumn(
                 name: "Weight",
                 table: "SetExercises");
-
-            migrationBuilder.RenameColumn(
-                name: "BracketName",
-                table: "WorkoutSets",
-                newName: "WorkoutName");
-
-            migrationBuilder.RenameColumn(
-                name: "BracketId",
-                table: "WorkoutSets",
-                newName: "WorkoutSetId");
 
             migrationBuilder.RenameColumn(
                 name: "BracketId",
@@ -88,10 +99,35 @@ namespace ColeStewart.MyWorkout.Data.Migrations
                 table: "SetExercises",
                 newName: "IX_SetExercises_WorkoutSetId");
 
+            migrationBuilder.CreateTable(
+                name: "WorkoutSets",
+                columns: table => new
+                {
+                    WorkoutSetId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    WorkoutId = table.Column<int>(type: "int", nullable: false),
+                    WorkoutName = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_WorkoutSets", x => x.WorkoutSetId);
+                    table.ForeignKey(
+                        name: "FK_WorkoutSets_Workouts_WorkoutId",
+                        column: x => x.WorkoutId,
+                        principalTable: "Workouts",
+                        principalColumn: "WorkoutId",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_SetExercises_ExerciseId",
                 table: "SetExercises",
                 column: "ExerciseId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_WorkoutSets_WorkoutId",
+                table: "WorkoutSets",
+                column: "WorkoutId");
 
             migrationBuilder.AddForeignKey(
                 name: "FK_SetExercises_Exercises_ExerciseId",
