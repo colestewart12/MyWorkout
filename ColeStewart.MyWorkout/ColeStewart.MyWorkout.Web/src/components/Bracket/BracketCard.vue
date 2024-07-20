@@ -21,6 +21,18 @@
         :workoutId="workoutId"
       ></EditBracketDialog>
     </template>
+    <div>
+      <v-btn
+        block
+        color="primary"
+        variant="tonal"
+        class="my-8"
+        prepend-icon="fas fa-plus"
+        @click=""
+      >
+        Add Exercise</v-btn
+      >
+    </div>
   </CardColorBar>
 </template>
 <script setup lang="ts">
