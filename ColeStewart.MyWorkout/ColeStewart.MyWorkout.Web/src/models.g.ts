@@ -167,5 +167,13 @@ export class Workout {
     Object.assign(this, Workout.map(data || {}));
   }
 }
+export namespace Workout {
+  export namespace DataSources {
+    
+    export class WorkoutDataSource implements DataSource<typeof metadata.Workout.dataSources.workoutDataSource> {
+      readonly $metadata = metadata.Workout.dataSources.workoutDataSource
+    }
+  }
+}
 
 

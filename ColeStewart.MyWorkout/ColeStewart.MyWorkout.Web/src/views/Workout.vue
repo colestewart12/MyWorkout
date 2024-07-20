@@ -22,6 +22,7 @@
       <v-btn
         color="primary"
         variant="tonal"
+        class="my-8"
         prepend-icon="fas fa-plus"
         @click="editBracket = true"
       >
@@ -32,6 +33,13 @@
         :bracket="bracket"
         :workoutId="workoutId"
       ></EditBracketDialog>
+    </div>
+    <div>
+      <v-row>
+        <v-col v-for="bracket in workout.brackets" :key="bracket.bracketId!">
+          <BracketCard :bracket="bracket" :workoutId="workoutId" />
+        </v-col>
+      </v-row>
     </div>
   </div>
 </template>

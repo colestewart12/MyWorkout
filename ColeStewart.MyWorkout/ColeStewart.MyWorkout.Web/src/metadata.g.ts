@@ -312,6 +312,14 @@ export const Workout = domain.types.Workout = {
   methods: {
   },
   dataSources: {
+    workoutDataSource: {
+      type: "dataSource",
+      name: "WorkoutDataSource",
+      displayName: "Workout Data Source",
+      isDefault: true,
+      props: {
+      },
+    },
   },
 }
 
