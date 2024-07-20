@@ -7,13 +7,13 @@ export class BracketApiClient extends ModelApiClient<$models.Bracket> {
 }
 
 
-export class ExerciseApiClient extends ModelApiClient<$models.Exercise> {
-  constructor() { super($metadata.Exercise) }
+export class BracketExerciseApiClient extends ModelApiClient<$models.BracketExercise> {
+  constructor() { super($metadata.BracketExercise) }
 }
 
 
-export class SetExerciseApiClient extends ModelApiClient<$models.SetExercise> {
-  constructor() { super($metadata.SetExercise) }
+export class ExerciseApiClient extends ModelApiClient<$models.Exercise> {
+  constructor() { super($metadata.Exercise) }
 }
 
 

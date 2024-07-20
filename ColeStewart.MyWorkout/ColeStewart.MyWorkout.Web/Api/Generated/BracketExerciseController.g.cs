@@ -21,51 +21,51 @@ using System.Threading.Tasks;
 
 namespace ColeStewart.MyWorkout.Web.Api
 {
-    [Route("api/SetExercise")]
+    [Route("api/BracketExercise")]
     [Authorize]
     [ServiceFilter(typeof(IApiActionFilter))]
-    public partial class SetExerciseController
-        : BaseApiController<ColeStewart.MyWorkout.Data.Models.SetExercise, SetExerciseDtoGen, ColeStewart.MyWorkout.Data.AppDbContext>
+    public partial class BracketExerciseController
+        : BaseApiController<ColeStewart.MyWorkout.Data.Models.BracketExercise, BracketExerciseDtoGen, ColeStewart.MyWorkout.Data.AppDbContext>
     {
-        public SetExerciseController(CrudContext<ColeStewart.MyWorkout.Data.AppDbContext> context) : base(context)
+        public BracketExerciseController(CrudContext<ColeStewart.MyWorkout.Data.AppDbContext> context) : base(context)
         {
-            GeneratedForClassViewModel = context.ReflectionRepository.GetClassViewModel<ColeStewart.MyWorkout.Data.Models.SetExercise>();
+            GeneratedForClassViewModel = context.ReflectionRepository.GetClassViewModel<ColeStewart.MyWorkout.Data.Models.BracketExercise>();
         }
 
         [HttpGet("get/{id}")]
         [Authorize]
-        public virtual Task<ItemResult<SetExerciseDtoGen>> Get(
+        public virtual Task<ItemResult<BracketExerciseDtoGen>> Get(
             int id,
             DataSourceParameters parameters,
-            IDataSource<ColeStewart.MyWorkout.Data.Models.SetExercise> dataSource)
+            IDataSource<ColeStewart.MyWorkout.Data.Models.BracketExercise> dataSource)
             => GetImplementation(id, parameters, dataSource);
 
         [HttpGet("list")]
         [Authorize]
-        public virtual Task<ListResult<SetExerciseDtoGen>> List(
+        public virtual Task<ListResult<BracketExerciseDtoGen>> List(
             ListParameters parameters,
-            IDataSource<ColeStewart.MyWorkout.Data.Models.SetExercise> dataSource)
+            IDataSource<ColeStewart.MyWorkout.Data.Models.BracketExercise> dataSource)
             => ListImplementation(parameters, dataSource);
 
         [HttpGet("count")]
         [Authorize]
         public virtual Task<ItemResult<int>> Count(
             FilterParameters parameters,
-            IDataSource<ColeStewart.MyWorkout.Data.Models.SetExercise> dataSource)
+            IDataSource<ColeStewart.MyWorkout.Data.Models.BracketExercise> dataSource)
             => CountImplementation(parameters, dataSource);
 
         [HttpPost("save")]
         [Authorize]
-        public virtual Task<ItemResult<SetExerciseDtoGen>> Save(
-            [FromForm] SetExerciseDtoGen dto,
+        public virtual Task<ItemResult<BracketExerciseDtoGen>> Save(
+            [FromForm] BracketExerciseDtoGen dto,
             [FromQuery] DataSourceParameters parameters,
-            IDataSource<ColeStewart.MyWorkout.Data.Models.SetExercise> dataSource,
-            IBehaviors<ColeStewart.MyWorkout.Data.Models.SetExercise> behaviors)
+            IDataSource<ColeStewart.MyWorkout.Data.Models.BracketExercise> dataSource,
+            IBehaviors<ColeStewart.MyWorkout.Data.Models.BracketExercise> behaviors)
             => SaveImplementation(dto, parameters, dataSource, behaviors);
 
         [HttpPost("bulkSave")]
         [Authorize]
-        public virtual Task<ItemResult<SetExerciseDtoGen>> BulkSave(
+        public virtual Task<ItemResult<BracketExerciseDtoGen>> BulkSave(
             [FromBody] BulkSaveRequest dto,
             [FromQuery] DataSourceParameters parameters,
             [FromServices] IDataSourceFactory dataSourceFactory,
@@ -74,10 +74,10 @@ namespace ColeStewart.MyWorkout.Web.Api
 
         [HttpPost("delete/{id}")]
         [Authorize]
-        public virtual Task<ItemResult<SetExerciseDtoGen>> Delete(
+        public virtual Task<ItemResult<BracketExerciseDtoGen>> Delete(
             int id,
-            IBehaviors<ColeStewart.MyWorkout.Data.Models.SetExercise> behaviors,
-            IDataSource<ColeStewart.MyWorkout.Data.Models.SetExercise> dataSource)
+            IBehaviors<ColeStewart.MyWorkout.Data.Models.BracketExercise> behaviors,
+            IDataSource<ColeStewart.MyWorkout.Data.Models.BracketExercise> dataSource)
             => DeleteImplementation(id, new DataSourceParameters(), dataSource, behaviors);
     }
 }

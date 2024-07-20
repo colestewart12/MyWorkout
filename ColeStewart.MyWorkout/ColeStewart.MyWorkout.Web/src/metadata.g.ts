@@ -60,19 +60,65 @@ export const Bracket = domain.types.Bracket = {
         required: val => val != null || "Workout Id is required.",
       }
     },
-    exercise: {
-      name: "exercise",
-      displayName: "Exercise",
+    exercises: {
+      name: "exercises",
+      displayName: "Exercises",
       type: "collection",
       itemType: {
         name: "$collectionItem",
         displayName: "",
         role: "value",
         type: "model",
-        get typeDef() { return (domain.types.SetExercise as ModelType) },
+        get typeDef() { return (domain.types.BracketExercise as ModelType) },
       },
       role: "value",
       dontSerialize: true,
+    },
+  },
+  methods: {
+  },
+  dataSources: {
+  },
+}
+export const BracketExercise = domain.types.BracketExercise = {
+  name: "BracketExercise",
+  displayName: "Bracket Exercise",
+  get displayProp() { return this.props.bracketExerciseId }, 
+  type: "model",
+  controllerRoute: "BracketExercise",
+  get keyProp() { return this.props.bracketExerciseId }, 
+  behaviorFlags: 7 as BehaviorFlags,
+  props: {
+    bracketExerciseId: {
+      name: "bracketExerciseId",
+      displayName: "Bracket Exercise Id",
+      type: "number",
+      role: "primaryKey",
+      hidden: 3 as HiddenAreas,
+    },
+    exerciseId: {
+      name: "exerciseId",
+      displayName: "Exercise Id",
+      type: "number",
+      role: "value",
+      rules: {
+        required: val => val != null || "Exercise Id is required.",
+      }
+    },
+    bracketId: {
+      name: "bracketId",
+      displayName: "Bracket Id",
+      type: "number",
+      role: "value",
+      rules: {
+        required: val => val != null || "Bracket Id is required.",
+      }
+    },
+    weight: {
+      name: "weight",
+      displayName: "Weight",
+      type: "number",
+      role: "value",
     },
   },
   methods: {
@@ -124,64 +170,6 @@ export const Exercise = domain.types.Exercise = {
         min: val => val == null || val >= 1 || "Difficulty must be at least 1.",
         max: val => val == null || val <= 5 || "Difficulty may not be more than 5.",
       }
-    },
-  },
-  methods: {
-  },
-  dataSources: {
-  },
-}
-export const SetExercise = domain.types.SetExercise = {
-  name: "SetExercise",
-  displayName: "Set Exercise",
-  get displayProp() { return this.props.setExerciseId }, 
-  type: "model",
-  controllerRoute: "SetExercise",
-  get keyProp() { return this.props.setExerciseId }, 
-  behaviorFlags: 7 as BehaviorFlags,
-  props: {
-    setExerciseId: {
-      name: "setExerciseId",
-      displayName: "Set Exercise Id",
-      type: "number",
-      role: "primaryKey",
-      hidden: 3 as HiddenAreas,
-    },
-    exerciseId: {
-      name: "exerciseId",
-      displayName: "Exercise Id",
-      type: "number",
-      role: "value",
-      rules: {
-        required: val => val != null || "Exercise Id is required.",
-      }
-    },
-    bracketId: {
-      name: "bracketId",
-      displayName: "Bracket Id",
-      type: "number",
-      role: "value",
-      rules: {
-        required: val => val != null || "Bracket Id is required.",
-      }
-    },
-    reps: {
-      name: "reps",
-      displayName: "Reps",
-      type: "number",
-      role: "value",
-    },
-    time: {
-      name: "time",
-      displayName: "Time",
-      type: "number",
-      role: "value",
-    },
-    weight: {
-      name: "weight",
-      displayName: "Weight",
-      type: "number",
-      role: "value",
     },
   },
   methods: {
@@ -333,8 +321,8 @@ interface AppDomain extends Domain {
   }
   types: {
     Bracket: typeof Bracket
+    BracketExercise: typeof BracketExercise
     Exercise: typeof Exercise
-    SetExercise: typeof SetExercise
     User: typeof User
     Widget: typeof Widget
     Workout: typeof Workout

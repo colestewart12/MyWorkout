@@ -39,7 +39,7 @@ const vuetify = createVuetify({
     VSwitch: { color: "primary" }, // https://github.com/vuetifyjs/vuetify/issues/16486
   },
   theme: {
-    defaultTheme: localStorage.getItem(DARK_THEME) === "true" ? "dark" : "dark",
+    defaultTheme: localStorage.getItem(DARK_THEME) === "true" ? "dark" : "light",
     variations: {
       colors: ["primary", "secondary"],
       lighten: 5,

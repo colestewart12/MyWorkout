@@ -7,7 +7,7 @@ export interface BracketViewModel extends $models.Bracket {
   bracketId: number | null;
   bracketName: string | null;
   workoutId: number | null;
-  exercise: SetExerciseViewModel[] | null;
+  exercises: BracketExerciseViewModel[] | null;
 }
 export class BracketViewModel extends ViewModel<$models.Bracket, $apiClients.BracketApiClient, number> implements $models.Bracket  {
   
@@ -21,6 +21,28 @@ export class BracketListViewModel extends ListViewModel<$models.Bracket, $apiCli
   
   constructor() {
     super($metadata.Bracket, new $apiClients.BracketApiClient())
+  }
+}
+
+
+export interface BracketExerciseViewModel extends $models.BracketExercise {
+  bracketExerciseId: number | null;
+  exerciseId: number | null;
+  bracketId: number | null;
+  weight: number | null;
+}
+export class BracketExerciseViewModel extends ViewModel<$models.BracketExercise, $apiClients.BracketExerciseApiClient, number> implements $models.BracketExercise  {
+  
+  constructor(initialData?: DeepPartial<$models.BracketExercise> | null) {
+    super($metadata.BracketExercise, new $apiClients.BracketExerciseApiClient(), initialData)
+  }
+}
+defineProps(BracketExerciseViewModel, $metadata.BracketExercise)
+
+export class BracketExerciseListViewModel extends ListViewModel<$models.BracketExercise, $apiClients.BracketExerciseApiClient, BracketExerciseViewModel> {
+  
+  constructor() {
+    super($metadata.BracketExercise, new $apiClients.BracketExerciseApiClient())
   }
 }
 
@@ -43,30 +65,6 @@ export class ExerciseListViewModel extends ListViewModel<$models.Exercise, $apiC
   
   constructor() {
     super($metadata.Exercise, new $apiClients.ExerciseApiClient())
-  }
-}
-
-
-export interface SetExerciseViewModel extends $models.SetExercise {
-  setExerciseId: number | null;
-  exerciseId: number | null;
-  bracketId: number | null;
-  reps: number | null;
-  time: number | null;
-  weight: number | null;
-}
-export class SetExerciseViewModel extends ViewModel<$models.SetExercise, $apiClients.SetExerciseApiClient, number> implements $models.SetExercise  {
-  
-  constructor(initialData?: DeepPartial<$models.SetExercise> | null) {
-    super($metadata.SetExercise, new $apiClients.SetExerciseApiClient(), initialData)
-  }
-}
-defineProps(SetExerciseViewModel, $metadata.SetExercise)
-
-export class SetExerciseListViewModel extends ListViewModel<$models.SetExercise, $apiClients.SetExerciseApiClient, SetExerciseViewModel> {
-  
-  constructor() {
-    super($metadata.SetExercise, new $apiClients.SetExerciseApiClient())
   }
 }
 
@@ -138,16 +136,16 @@ export class WorkoutListViewModel extends ListViewModel<$models.Workout, $apiCli
 
 const viewModelTypeLookup = ViewModel.typeLookup = {
   Bracket: BracketViewModel,
+  BracketExercise: BracketExerciseViewModel,
   Exercise: ExerciseViewModel,
-  SetExercise: SetExerciseViewModel,
   User: UserViewModel,
   Widget: WidgetViewModel,
   Workout: WorkoutViewModel,
 }
 const listViewModelTypeLookup = ListViewModel.typeLookup = {
   Bracket: BracketListViewModel,
+  BracketExercise: BracketExerciseListViewModel,
   Exercise: ExerciseListViewModel,
-  SetExercise: SetExerciseListViewModel,
   User: UserListViewModel,
   Widget: WidgetListViewModel,
   Workout: WorkoutListViewModel,
