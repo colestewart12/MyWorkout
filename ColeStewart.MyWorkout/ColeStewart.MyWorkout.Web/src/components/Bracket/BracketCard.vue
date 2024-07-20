@@ -28,7 +28,6 @@
         variant="tonal"
         class="my-8"
         prepend-icon="fas fa-plus"
-        @click=""
       >
         Add Exercise</v-btn
       >
