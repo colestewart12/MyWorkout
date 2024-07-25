@@ -28,18 +28,29 @@
         variant="tonal"
         class="my-8"
         prepend-icon="fas fa-plus"
+        @click="editBracketExercise = true"
       >
         Add Exercise</v-btn
       >
+      <EditBracketExerciseDialog
+        v-model="editBracketExercise"
+        :bracketExercise="bracketExercise"
+        :bracketId="bracket.bracketId!"
+        :workoutId="workoutId"
+      ></EditBracketExerciseDialog>
     </div>
   </CardColorBar>
 </template>
 <script setup lang="ts">
-import { BracketViewModel } from "@/viewmodels.g";
+import { BracketViewModel, BracketExerciseViewModel } from "@/viewmodels.g";
+import EditBracketDialog from "./EditBracketDialog.vue";
 
 const props = defineProps<{
   bracket: BracketViewModel;
   workoutId: number;
 }>();
 const editBracket = ref<boolean>(false);
+
+const editBracketExercise = ref<boolean>(false);
+const bracketExercise = new BracketExerciseViewModel();
 </script>
