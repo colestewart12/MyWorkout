@@ -30,8 +30,8 @@
         prepend-icon="fas fa-plus"
         @click="editBracketExercise = true"
       >
-        Add Exercise</v-btn
-      >
+        Add Exercise
+      </v-btn>
       <EditBracketExerciseDialog
         v-model="editBracketExercise"
         :bracketExercise="bracketExercise"
@@ -39,10 +39,28 @@
         :workoutId="workoutId"
       ></EditBracketExerciseDialog>
     </div>
+    <v-list>
+      <v-list-item
+        v-for="(exercise, index) in bracketExercises.$items"
+        :key="exercise.bracketExerciseId!"
+      >
+        <v-checkbox
+          :label="`Exercise ${exercise.exerciseId} - Weight: ${
+            exercise.weight || 'N/A'
+          }`"
+          v-model="exercise.completed"
+        ></v-checkbox>
+      </v-list-item>
+    </v-list>
   </CardColorBar>
 </template>
 <script setup lang="ts">
-import { BracketViewModel, BracketExerciseViewModel } from "@/viewmodels.g";
+import {
+  BracketViewModel,
+  BracketExerciseViewModel,
+  BracketExerciseListViewModel,
+} from "@/viewmodels.g";
+import { BracketExercise } from "@/models.g";
 import EditBracketDialog from "./EditBracketDialog.vue";
 
 const props = defineProps<{
@@ -53,4 +71,14 @@ const editBracket = ref<boolean>(false);
 
 const editBracketExercise = ref<boolean>(false);
 const bracketExercise = new BracketExerciseViewModel();
+
+const bracketExercises = new BracketExerciseListViewModel();
+const beDataSource =
+  new BracketExercise.DataSources.BracketExerciseDataSource();
+beDataSource.bracketId = props.bracket.bracketId!;
+
+bracketExercises.$dataSource = beDataSource;
+bracketExercises.$load();
+
+console.log(bracketExercises);
 </script>

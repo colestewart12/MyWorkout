@@ -28,10 +28,7 @@
             v-model="selectedExercise"
             :items="exercises.$items"
             item-title="name"
-            label="Exercises"
-            multiple
-            chips
-            closable-chips
+            label="Exercise"
             clearable
             hide-details
           />
@@ -92,18 +89,17 @@ const isBracketExerciseValid = useFormValidation(
   modelValue,
 );
 
-const selectedExerciseIds = ref<string | undefined>();
+const selectedExerciseId = ref<number | null>();
 const selectedExercise = computed({
   get: () => {
-    return exercises.$items.filter(
-      (e) => selectedExerciseIds.value?.includes(e.exerciseId!.toString()),
+    return exercises.$items.find(
+      (e) => e.exerciseId === selectedExerciseId.value,
     );
   },
   set: (value: any) => {
-    selectedExerciseIds.value = value.map((e: any) => e.exerciseId);
+    selectedExerciseId.value = value?.exerciseId;
   },
 });
-selectedExercise
 const exercises = new ExerciseListViewModel();
 exercises.$load();
 
@@ -115,6 +111,8 @@ async function deleteBracketExercise() {
 const isSaving = computed(() => props.bracketExercise.$save.isLoading);
 
 async function save() {
+  props.bracketExercise.exerciseId = selectedExerciseId.value ?? null;
+  props.bracketExercise.bracketId = props.bracketId;
   await props.bracketExercise.$save();
   router.push(`/workout/${props.workoutId}`);
   close();
