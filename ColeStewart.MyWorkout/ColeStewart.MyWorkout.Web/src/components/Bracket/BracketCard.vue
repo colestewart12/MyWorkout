@@ -41,7 +41,7 @@
     </div>
     <v-list>
       <v-list-item
-        v-for="(exercise, index) in bracketExercises.$items"
+        v-for="exercise in bracketExercises.$items"
         :key="exercise.bracketExerciseId!"
       >
         <v-checkbox

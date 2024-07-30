@@ -110,10 +110,13 @@ async function deleteBracketExercise() {
 
 const isSaving = computed(() => props.bracketExercise.$save.isLoading);
 
+let newExercise = new BracketExerciseViewModel();
+newExercise = props.bracketExercise;
+
 async function save() {
-  props.bracketExercise.exerciseId = selectedExerciseId.value ?? null;
-  props.bracketExercise.bracketId = props.bracketId;
-  await props.bracketExercise.$save();
+  newExercise.exerciseId = selectedExerciseId.value ?? null;
+  newExercise.bracketId = props.bracketId;
+  await newExercise.$save();
   router.push(`/workout/${props.workoutId}`);
   close();
 }
