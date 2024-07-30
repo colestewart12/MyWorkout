@@ -124,6 +124,20 @@ export const BracketExercise = domain.types.BracketExercise = {
   methods: {
   },
   dataSources: {
+    bracketExerciseDataSource: {
+      type: "dataSource",
+      name: "BracketExerciseDataSource",
+      displayName: "Bracket Exercise Data Source",
+      isDefault: true,
+      props: {
+        bracketId: {
+          name: "bracketId",
+          displayName: "Bracket Id",
+          type: "number",
+          role: "value",
+        },
+      },
+    },
   },
 }
 export const Exercise = domain.types.Exercise = {
@@ -175,6 +189,20 @@ export const Exercise = domain.types.Exercise = {
   methods: {
   },
   dataSources: {
+    exerciseDataSource: {
+      type: "dataSource",
+      name: "ExerciseDataSource",
+      displayName: "Exercise Data Source",
+      isDefault: true,
+      props: {
+        exerciseId: {
+          name: "exerciseId",
+          displayName: "Exercise Id",
+          type: "number",
+          role: "value",
+        },
+      },
+    },
   },
 }
 export const User = domain.types.User = {

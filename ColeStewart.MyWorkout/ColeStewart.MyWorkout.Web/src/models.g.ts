@@ -60,6 +60,19 @@ export class BracketExercise {
     Object.assign(this, BracketExercise.map(data || {}));
   }
 }
+export namespace BracketExercise {
+  export namespace DataSources {
+    
+    export class BracketExerciseDataSource implements DataSource<typeof metadata.BracketExercise.dataSources.bracketExerciseDataSource> {
+      readonly $metadata = metadata.BracketExercise.dataSources.bracketExerciseDataSource
+      bracketId: number | null = null
+      
+      constructor(params?: Omit<Partial<BracketExerciseDataSource>, '$metadata'>) {
+        if (params) Object.assign(this, params);
+      }
+    }
+  }
+}
 
 
 export interface Exercise extends Model<typeof metadata.Exercise> {
@@ -85,6 +98,19 @@ export class Exercise {
   /** Instantiate a new Exercise, optionally basing it on the given data. */
   constructor(data?: Partial<Exercise> | {[k: string]: any}) {
     Object.assign(this, Exercise.map(data || {}));
+  }
+}
+export namespace Exercise {
+  export namespace DataSources {
+    
+    export class ExerciseDataSource implements DataSource<typeof metadata.Exercise.dataSources.exerciseDataSource> {
+      readonly $metadata = metadata.Exercise.dataSources.exerciseDataSource
+      exerciseId: number | null = null
+      
+      constructor(params?: Omit<Partial<ExerciseDataSource>, '$metadata'>) {
+        if (params) Object.assign(this, params);
+      }
+    }
   }
 }
 

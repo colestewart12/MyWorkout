@@ -13,4 +13,16 @@ public class BracketExercise
     [Required]
     public int BracketId { get; set; }
     public int? Weight { get; set; }
+
+    [DefaultDataSource]
+    public class BracketExerciseDataSource(CrudContext<AppDbContext> context) : StandardDataSource<BracketExercise, AppDbContext>(context)
+    {
+        [Coalesce]
+        public int? BracketId { get; set; }
+        public override IQueryable<BracketExercise> GetQuery(IDataSourceParameters parameters)
+        {
+            IQueryable<BracketExercise> query = base.GetQuery(parameters);
+            return query.Where(be => be.BracketId == BracketId);
+        }
+    }
 }
