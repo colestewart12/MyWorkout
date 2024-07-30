@@ -45,10 +45,7 @@
         :key="exercise.bracketExerciseId!"
       >
         <v-checkbox
-          :label="`Exercise ${exercise.exerciseId} - Weight: ${
-            exercise.weight || 'N/A'
-          }`"
-          v-model="exercise.completed"
+          :label="getExerciseName(exercise.exerciseId!) ?? ''"
         ></v-checkbox>
       </v-list-item>
     </v-list>
@@ -59,8 +56,9 @@ import {
   BracketViewModel,
   BracketExerciseViewModel,
   BracketExerciseListViewModel,
+  ExerciseListViewModel,
 } from "@/viewmodels.g";
-import { BracketExercise } from "@/models.g";
+import { BracketExercise, Exercise } from "@/models.g";
 import EditBracketDialog from "./EditBracketDialog.vue";
 
 const props = defineProps<{
@@ -80,5 +78,13 @@ beDataSource.bracketId = props.bracket.bracketId!;
 bracketExercises.$dataSource = beDataSource;
 bracketExercises.$load();
 
-console.log(bracketExercises);
+const exerciseList = new ExerciseListViewModel();
+const exerciseDataSource = new Exercise.DataSources.ExerciseDataSource();
+exerciseList.$dataSource = exerciseDataSource;
+exerciseList.$load();
+
+const getExerciseName = (exerciseId: number) => {
+  const exercise = exerciseList.$items.find((e) => e.exerciseId === exerciseId);
+  return exercise?.name;
+};
 </script>

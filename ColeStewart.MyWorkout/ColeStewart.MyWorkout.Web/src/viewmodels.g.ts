@@ -30,7 +30,6 @@ export interface BracketExerciseViewModel extends $models.BracketExercise {
   exerciseId: number | null;
   bracketId: number | null;
   weight: number | null;
-  completed: boolean | null;
 }
 export class BracketExerciseViewModel extends ViewModel<$models.BracketExercise, $apiClients.BracketExerciseApiClient, number> implements $models.BracketExercise  {
   

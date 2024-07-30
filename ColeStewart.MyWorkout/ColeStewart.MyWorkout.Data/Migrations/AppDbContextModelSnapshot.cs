@@ -54,9 +54,6 @@ namespace ColeStewart.MyWorkout.Data.Migrations
                     b.Property<int>("BracketId")
                         .HasColumnType("int");
 
-                    b.Property<bool>("Completed")
-                        .HasColumnType("bit");
-
                     b.Property<int>("ExerciseId")
                         .HasColumnType("int");
 

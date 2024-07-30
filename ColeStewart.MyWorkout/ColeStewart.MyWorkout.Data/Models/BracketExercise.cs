@@ -13,7 +13,6 @@ public class BracketExercise
     [Required]
     public int BracketId { get; set; }
     public int? Weight { get; set; }
-    public bool Completed { get; set; }
 
     [DefaultDataSource]
     public class BracketExerciseDataSource(CrudContext<AppDbContext> context) : StandardDataSource<BracketExercise, AppDbContext>(context)

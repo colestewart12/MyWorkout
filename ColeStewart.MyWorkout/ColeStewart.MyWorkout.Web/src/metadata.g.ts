@@ -120,12 +120,6 @@ export const BracketExercise = domain.types.BracketExercise = {
       type: "number",
       role: "value",
     },
-    completed: {
-      name: "completed",
-      displayName: "Completed",
-      type: "boolean",
-      role: "value",
-    },
   },
   methods: {
   },
@@ -195,6 +189,20 @@ export const Exercise = domain.types.Exercise = {
   methods: {
   },
   dataSources: {
+    exerciseDataSource: {
+      type: "dataSource",
+      name: "ExerciseDataSource",
+      displayName: "Exercise Data Source",
+      isDefault: true,
+      props: {
+        exerciseId: {
+          name: "exerciseId",
+          displayName: "Exercise Id",
+          type: "number",
+          role: "value",
+        },
+      },
+    },
   },
 }
 export const User = domain.types.User = {

@@ -16,7 +16,6 @@ namespace ColeStewart.MyWorkout.Web.Models
         private int? _ExerciseId;
         private int? _BracketId;
         private int? _Weight;
-        private bool? _Completed;
 
         public int? BracketExerciseId
         {
@@ -38,11 +37,6 @@ namespace ColeStewart.MyWorkout.Web.Models
             get => _Weight;
             set { _Weight = value; Changed(nameof(Weight)); }
         }
-        public bool? Completed
-        {
-            get => _Completed;
-            set { _Completed = value; Changed(nameof(Completed)); }
-        }
 
         /// <summary>
         /// Map from the domain object to the properties of the current DTO instance.
@@ -56,7 +50,6 @@ namespace ColeStewart.MyWorkout.Web.Models
             this.ExerciseId = obj.ExerciseId;
             this.BracketId = obj.BracketId;
             this.Weight = obj.Weight;
-            this.Completed = obj.Completed;
         }
 
         /// <summary>
@@ -72,7 +65,6 @@ namespace ColeStewart.MyWorkout.Web.Models
             if (ShouldMapTo(nameof(ExerciseId))) entity.ExerciseId = (ExerciseId ?? entity.ExerciseId);
             if (ShouldMapTo(nameof(BracketId))) entity.BracketId = (BracketId ?? entity.BracketId);
             if (ShouldMapTo(nameof(Weight))) entity.Weight = Weight;
-            if (ShouldMapTo(nameof(Completed))) entity.Completed = (Completed ?? entity.Completed);
         }
 
         /// <summary>

@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ColeStewart.MyWorkout.Data.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20240725031428_CompletedBool")]
-    partial class CompletedBool
+    [Migration("20240730033235_UpdateBracketExercise")]
+    partial class UpdateBracketExercise
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -56,9 +56,6 @@ namespace ColeStewart.MyWorkout.Data.Migrations
 
                     b.Property<int>("BracketId")
                         .HasColumnType("int");
-
-                    b.Property<bool>("Completed")
-                        .HasColumnType("bit");
 
                     b.Property<int>("ExerciseId")
                         .HasColumnType("int");

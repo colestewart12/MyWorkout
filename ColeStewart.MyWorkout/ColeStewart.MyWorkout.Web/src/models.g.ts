@@ -40,7 +40,6 @@ export interface BracketExercise extends Model<typeof metadata.BracketExercise> 
   exerciseId: number | null
   bracketId: number | null
   weight: number | null
-  completed: boolean | null
 }
 export class BracketExercise {
   
@@ -99,6 +98,19 @@ export class Exercise {
   /** Instantiate a new Exercise, optionally basing it on the given data. */
   constructor(data?: Partial<Exercise> | {[k: string]: any}) {
     Object.assign(this, Exercise.map(data || {}));
+  }
+}
+export namespace Exercise {
+  export namespace DataSources {
+    
+    export class ExerciseDataSource implements DataSource<typeof metadata.Exercise.dataSources.exerciseDataSource> {
+      readonly $metadata = metadata.Exercise.dataSources.exerciseDataSource
+      exerciseId: number | null = null
+      
+      constructor(params?: Omit<Partial<ExerciseDataSource>, '$metadata'>) {
+        if (params) Object.assign(this, params);
+      }
+    }
   }
 }
 
