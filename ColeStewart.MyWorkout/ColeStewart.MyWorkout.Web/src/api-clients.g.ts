@@ -1,6 +1,6 @@
 import * as $metadata from './metadata.g'
 import * as $models from './models.g'
-import { AxiosPromise, AxiosRequestConfig, ModelApiClient, ServiceApiClient, ItemResult, ListResult } from 'coalesce-vue/lib/api-client'
+import { ModelApiClient, ServiceApiClient, ItemResult, ListResult } from 'coalesce-vue/lib/api-client'
 
 export class BracketApiClient extends ModelApiClient<$models.Bracket> {
   constructor() { super($metadata.Bracket) }
