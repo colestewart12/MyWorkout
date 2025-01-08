@@ -37,6 +37,7 @@
         :bracketExercise="bracketExercise"
         :bracketId="bracket.bracketId!"
         :workoutId="workoutId"
+        @save="refreshBracket"
       ></EditBracketExerciseDialog>
     </div>
     <v-list>
@@ -87,4 +88,8 @@ const getExerciseName = (exerciseId: number) => {
   const exercise = exerciseList.$items.find((e) => e.exerciseId === exerciseId);
   return exercise?.name;
 };
+
+function refreshBracket() {
+  bracketExercises.$load();
+}
 </script>
