@@ -77,6 +77,10 @@ const props = defineProps<{
   exercise: ExerciseViewModel;
 }>();
 
+const emit = defineEmits<{
+  (event: "save"): void;
+}>();
+
 const isNew = computed(() => !props.exercise?.exerciseId);
 
 const titleText = computed(() =>
@@ -97,6 +101,7 @@ async function save() {
   await props.exercise.$save();
   // If you want to take to the specific exercise page after saving add the id to the route
   router.push("/exercise");
+  emit("save");
   close();
 }
 

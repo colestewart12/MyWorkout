@@ -77,6 +77,10 @@ const props = defineProps<{
   workoutId: number;
 }>();
 
+const emit = defineEmits<{
+  (event: "save"): void;
+}>();
+
 const isNew = computed(() => !props.bracketExercise?.bracketExerciseId);
 
 const titleText = computed(() =>
@@ -118,6 +122,7 @@ async function save() {
   newExercise.bracketId = props.bracketId;
   await newExercise.$save();
   router.push(`/workout/${props.workoutId}`);
+  emit("save");
   close();
 }
 
