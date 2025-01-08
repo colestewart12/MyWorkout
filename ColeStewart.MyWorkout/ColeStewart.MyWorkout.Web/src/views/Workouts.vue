@@ -12,7 +12,11 @@
           Add Workout
         </v-btn>
       </v-col>
-      <EditWorkoutDialog v-model="addWorkout" :workout="newWorkout" />
+      <EditWorkoutDialog
+        v-model="addWorkout"
+        :workout="newWorkout"
+        @save="refreshWorkouts"
+      />
     </v-row>
     <v-row class="mt-4">
       <v-col v-for="workout in workouts.$items" :key="workout.workoutId!">
@@ -31,6 +35,10 @@ console.log(workouts.$items);
 
 const addWorkout = ref<boolean>(false);
 const newWorkout = new WorkoutViewModel();
+
+function refreshWorkouts() {
+  workouts.$load();
+}
 </script>
 
 <style>
